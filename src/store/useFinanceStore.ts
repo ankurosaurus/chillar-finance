@@ -10,6 +10,7 @@ import {
   PlannedItem,
   DayPlan,
   PaymentMode,
+  UserAccount,
 } from '../types/finance';
 import {
   INITIAL_PROFILE,
@@ -20,6 +21,8 @@ import {
 import { calculateRoundUp, calculateWeeklyBudget } from '../lib/budgetMath';
 
 interface FinanceState {
+  currentUser: UserAccount | null;
+  users: UserAccount[];
   profile: Profile;
   transactions: Transaction[];
   categories: Category[];
@@ -31,6 +34,11 @@ interface FinanceState {
   activeTab: 'home' | 'ledger' | 'planner' | 'goals' | 'insights' | 'settings';
   isQuickAddOpen: boolean;
   isAffordabilityModalOpen: boolean;
+
+  // Auth actions
+  login: (username: string, password: string) => boolean;
+  register: (username: string, password: string, fullName?: string) => boolean;
+  logout: () => void;
 
   // Actions
   setActiveTab: (tab: 'home' | 'ledger' | 'planner' | 'goals' | 'insights' | 'settings') => void;
@@ -104,6 +112,8 @@ if (typeof window !== 'undefined') {
 export const useFinanceStore = create<FinanceState>()(
   persist(
     (set, get) => ({
+      currentUser: null,
+      users: [],
       profile: INITIAL_PROFILE,
       transactions: [],
       categories: INITIAL_CATEGORIES,
@@ -115,6 +125,48 @@ export const useFinanceStore = create<FinanceState>()(
       activeTab: 'home',
       isQuickAddOpen: false,
       isAffordabilityModalOpen: false,
+
+      // Authentication
+      login: (username: string, password: string) => {
+        const hash = simpleHash(password);
+        const users = get().users || [];
+        const found = users.find(
+          (u) => u.username.toLowerCase() === username.trim().toLowerCase() && u.passwordHash === hash
+        );
+        if (found) {
+          set({ currentUser: found });
+          return true;
+        }
+        return false;
+      },
+
+      register: (username: string, password: string, fullName?: string) => {
+        const trimmed = username.trim();
+        if (!trimmed || !password) return false;
+        const users = get().users || [];
+        const exists = users.some(
+          (u) => u.username.toLowerCase() === trimmed.toLowerCase()
+        );
+        if (exists) return false;
+
+        const newUser: UserAccount = {
+          id: `usr-${Date.now()}`,
+          username: trimmed,
+          fullName: fullName?.trim() || trimmed,
+          passwordHash: simpleHash(password),
+          createdAt: new Date().toISOString(),
+        };
+
+        set({
+          users: [...users, newUser],
+          currentUser: newUser,
+        });
+        return true;
+      },
+
+      logout: () => {
+        set({ currentUser: null });
+      },
 
       setActiveTab: (tab) => set({ activeTab: tab }),
       setQuickAddOpen: (open) => set({ isQuickAddOpen: open }),
@@ -592,6 +644,7 @@ export const useFinanceStore = create<FinanceState>()(
       exportJSON: () => {
         const state = get();
         const exportObj = {
+          currentUser: state.currentUser,
           profile: state.profile,
           transactions: state.transactions,
           categories: state.categories,
@@ -599,7 +652,7 @@ export const useFinanceStore = create<FinanceState>()(
           challenges: state.challenges,
           dayPlans: state.dayPlans,
           exportedAt: new Date().toISOString(),
-          version: '1.1.0',
+          version: '1.2.0',
         };
         return JSON.stringify(exportObj, null, 2);
       },
@@ -610,7 +663,7 @@ export const useFinanceStore = create<FinanceState>()(
           if (!parsed.profile || !Array.isArray(parsed.transactions)) {
             return false;
           }
-          set({
+          set((state) => ({
             profile: parsed.profile,
             transactions: parsed.transactions,
             categories: parsed.categories || INITIAL_CATEGORIES,
@@ -618,7 +671,8 @@ export const useFinanceStore = create<FinanceState>()(
             challenges: parsed.challenges || [],
             dayPlans: parsed.dayPlans || {},
             alerts: [],
-          });
+            currentUser: parsed.currentUser || state.currentUser,
+          }));
           return true;
         } catch {
           return false;
@@ -647,6 +701,8 @@ export const useFinanceStore = create<FinanceState>()(
       name: 'chillar:store:v6',
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
+        currentUser: state.currentUser,
+        users: state.users,
         profile: state.profile,
         transactions: state.transactions,
         categories: state.categories,

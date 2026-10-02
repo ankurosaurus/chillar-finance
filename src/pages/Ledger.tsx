@@ -204,20 +204,20 @@ export const Ledger: React.FC = () => {
       {/* Summary Row: Income, Spent, Saved */}
       <Card variant="surface" className="grid grid-cols-3 gap-2 py-4 px-3 text-center">
         <div>
-          <span className="meta-label text-[#94A3B8] block mb-1">Income</span>
-          <span className="font-serif-display text-base md:text-lg tnum text-[#10B981]">
+          <span className="meta-label text-slate-400 block mb-1">Income</span>
+          <span className="font-serif-display text-base md:text-lg tnum text-emerald-400">
             {formatINR(summary.income)}
           </span>
         </div>
         <div className="border-x border-inherit">
-          <span className="meta-label text-[#94A3B8] block mb-1">Spent</span>
-          <span className="font-serif-display text-base md:text-lg tnum text-[#D4AF37]">
+          <span className="meta-label text-slate-400 block mb-1">Spent</span>
+          <span className="font-serif-display text-base md:text-lg tnum text-blue-400">
             {formatINR(summary.spent)}
           </span>
         </div>
         <div>
-          <span className="meta-label text-[#94A3B8] block mb-1">Saved</span>
-          <span className="font-serif-display text-base md:text-lg tnum text-[#94A3B8]">
+          <span className="meta-label text-slate-400 block mb-1">Saved</span>
+          <span className="font-serif-display text-base md:text-lg tnum text-slate-400">
             {formatINR(summary.saved)}
           </span>
         </div>
@@ -228,11 +228,11 @@ export const Ledger: React.FC = () => {
         <div
           className={`flex items-center gap-2 px-3.5 py-2.5 rounded-2xl border transition-colors ${
             isDark
-              ? 'bg-[#10121A] border-[rgba(255,255,255,0.08)] focus-within:border-[#D4AF37]'
-              : 'bg-[#FFFFFF] border-[rgba(15,23,42,0.08)] focus-within:border-[#D4AF37]'
+              ? 'bg-[#0B0F19] border-white/10 focus-within:border-blue-500'
+              : 'bg-white border-slate-200 focus-within:border-blue-500'
           }`}
         >
-          <Search strokeWidth={1.5} className="w-4 h-4 text-[#94A3B8] shrink-0" />
+          <Search strokeWidth={1.5} className="w-4 h-4 text-slate-400 shrink-0" />
           <input
             type="text"
             placeholder="Search notes, categories, amounts..."
@@ -335,7 +335,7 @@ export const Ledger: React.FC = () => {
                               {tx.note || cat?.name || 'Entry'}
                             </span>
                             {tx.isRoundUp && (
-                              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#D4AF37]/15 text-[#D4AF37]">
+                              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-blue-600/15 text-blue-400">
                                 +₹{tx.roundUpAmount} round-up
                               </span>
                             )}
@@ -392,21 +392,21 @@ export const Ledger: React.FC = () => {
         {editingTx && (
           <div className="flex flex-col gap-4 pb-4">
             <div>
-              <span className="meta-label text-[#94A3B8] mb-1 block">Amount</span>
+              <span className="meta-label text-slate-400 mb-1 block">Amount</span>
               <input
                 type="number"
                 value={editAmount}
                 onChange={(e) => setEditAmount(e.target.value)}
                 className={`w-full px-4 py-3 rounded-2xl border font-serif-display text-2xl tnum outline-none ${
                   isDark
-                    ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#D4AF37]'
-                    : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#D4AF37]'
+                    ? 'bg-[#0B0F19] border-white/10 text-blue-400'
+                    : 'bg-slate-100 border-slate-200 text-blue-600'
                 }`}
               />
             </div>
 
             <div>
-              <span className="meta-label text-[#94A3B8] mb-1 block">Note</span>
+              <span className="meta-label text-slate-400 mb-1 block">Note</span>
               <input
                 type="text"
                 value={editNote}
@@ -414,21 +414,21 @@ export const Ledger: React.FC = () => {
                 placeholder="Description"
                 className={`w-full px-3.5 py-2.5 rounded-2xl border text-sm outline-none ${
                   isDark
-                    ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#F8FAFC]'
-                    : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A]'
+                    ? 'bg-[#0B0F19] border-white/10 text-white'
+                    : 'bg-slate-100 border-slate-200 text-slate-900'
                 }`}
               />
             </div>
 
             <div>
-              <span className="meta-label text-[#94A3B8] mb-1 block">Category</span>
+              <span className="meta-label text-slate-400 mb-1 block">Category</span>
               <select
                 value={editCategoryId}
                 onChange={(e) => setEditCategoryId(e.target.value)}
                 className={`w-full px-3.5 py-2.5 rounded-2xl border text-sm outline-none ${
                   isDark
-                    ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#F8FAFC]'
-                    : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A]'
+                    ? 'bg-[#0B0F19] border-white/10 text-white'
+                    : 'bg-slate-100 border-slate-200 text-slate-900'
                 }`}
               >
                 {categories.map((c) => (
@@ -441,14 +441,14 @@ export const Ledger: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <span className="meta-label text-[#94A3B8] mb-1 block">Mode</span>
+                <span className="meta-label text-slate-400 mb-1 block">Mode</span>
                 <select
                   value={editMode}
                   onChange={(e) => setEditMode(e.target.value as PaymentMode)}
                   className={`w-full px-3 py-2 rounded-2xl border text-xs outline-none ${
                     isDark
-                      ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#F8FAFC]'
-                      : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A]'
+                      ? 'bg-[#0B0F19] border-white/10 text-white'
+                      : 'bg-slate-100 border-slate-200 text-slate-900'
                   }`}
                 >
                   <option value="UPI">UPI</option>
@@ -458,15 +458,15 @@ export const Ledger: React.FC = () => {
               </div>
 
               <div>
-                <span className="meta-label text-[#94A3B8] mb-1 block">Date</span>
+                <span className="meta-label text-slate-400 mb-1 block">Date</span>
                 <input
                   type="date"
                   value={editDate}
                   onChange={(e) => setEditDate(e.target.value)}
                   className={`w-full px-3 py-2 rounded-2xl border text-xs outline-none ${
                     isDark
-                      ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#F8FAFC]'
-                      : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A]'
+                      ? 'bg-[#0B0F19] border-white/10 text-white'
+                      : 'bg-slate-100 border-slate-200 text-slate-900'
                   }`}
                 />
               </div>
@@ -476,7 +476,7 @@ export const Ledger: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleDelete(editingTx.id)}
-                className="px-4 py-3 rounded-2xl border border-[#F43F5E]/40 text-[#F43F5E] hover:bg-[#F43F5E]/10 text-xs font-medium flex items-center gap-1.5 transition-colors"
+                className="px-4 py-3 rounded-2xl border border-rose-500/40 text-rose-400 hover:bg-rose-500/10 text-xs font-medium flex items-center gap-1.5 transition-colors"
               >
                 <Trash2 strokeWidth={1.5} className="w-4 h-4" />
                 <span>Delete</span>
@@ -485,7 +485,7 @@ export const Ledger: React.FC = () => {
               <button
                 type="button"
                 onClick={handleSaveEdit}
-                className="flex-1 py-3 rounded-2xl bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] font-serif-display text-base tracking-wide font-medium transition-colors"
+                className="flex-1 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-serif-display text-base tracking-wide font-medium shadow-md shadow-blue-600/25 transition-all"
               >
                 Save Changes
               </button>

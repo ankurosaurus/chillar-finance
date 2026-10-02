@@ -46,7 +46,7 @@ export const AffordabilityModal: React.FC = () => {
             onClick={() => setShowKeypad(!showKeypad)}
             className="flex items-baseline gap-1 py-1 px-4 rounded-2xl hover:bg-white/5 transition-colors"
           >
-            <span className="font-serif-display text-4xl md:text-5xl font-light tnum text-[#D4AF37]">
+            <span className="font-serif-display text-4xl md:text-5xl font-light tnum text-blue-500">
               {formatINR(amount)}
             </span>
           </button>
@@ -65,7 +65,7 @@ export const AffordabilityModal: React.FC = () => {
                 onClick={() => setAmountStr(preset.toString())}
                 className={`px-3 py-1 text-xs rounded-full border transition-all ${
                   amount === preset
-                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#D4AF37]'
+                    ? 'border-blue-500 bg-blue-500/15 text-blue-400 font-medium'
                     : isDark
                     ? 'border-white/10 hover:border-white/20 text-[#94A3B8]'
                     : 'border-black/10 hover:border-black/20 text-[#64748B]'
@@ -95,7 +95,7 @@ export const AffordabilityModal: React.FC = () => {
             analysis.weeklyBudgetStatus === 'exceeded'
               ? 'border-[#F43F5E]/40 bg-[#F43F5E]/10'
               : analysis.weeklyBudgetStatus === 'tight'
-              ? 'border-[#D4AF37]/40 bg-[#D4AF37]/10'
+              ? 'border-blue-500/40 bg-blue-500/10'
               : 'border-[#10B981]/40 bg-[#10B981]/10'
           }
         >
@@ -103,7 +103,7 @@ export const AffordabilityModal: React.FC = () => {
             {analysis.weeklyBudgetStatus === 'exceeded' ? (
               <AlertCircle className="w-5 h-5 text-[#F43F5E]" />
             ) : analysis.weeklyBudgetStatus === 'tight' ? (
-              <Sparkles className="w-5 h-5 text-[#D4AF37]" />
+              <Sparkles className="w-5 h-5 text-blue-400" />
             ) : (
               <CheckCircle2 className="w-5 h-5 text-[#10B981]" />
             )}
@@ -112,7 +112,7 @@ export const AffordabilityModal: React.FC = () => {
                 analysis.weeklyBudgetStatus === 'exceeded'
                   ? 'text-[#F43F5E]'
                   : analysis.weeklyBudgetStatus === 'tight'
-                  ? 'text-[#D4AF37]'
+                  ? 'text-blue-400'
                   : 'text-[#10B981]'
               }`}
             >
@@ -146,7 +146,7 @@ export const AffordabilityModal: React.FC = () => {
               className={`font-serif-display text-2xl tnum ${
                 analysis.newSafeToday < 100
                   ? 'text-[#F43F5E]'
-                  : 'text-[#D4AF37]'
+                  : 'text-blue-400'
               }`}
             >
               {formatINR(analysis.newSafeToday)}
@@ -160,7 +160,7 @@ export const AffordabilityModal: React.FC = () => {
         {/* Goal Impact */}
         {analysis.goalImpact && (
           <Card className="p-4 flex items-start gap-3">
-            <Clock strokeWidth={1.5} className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+            <Clock strokeWidth={1.5} className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
             <div>
               <span className="meta-label text-[#94A3B8] block mb-1">
                 Impact on "{analysis.goalImpact.goalName}"

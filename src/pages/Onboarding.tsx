@@ -85,7 +85,7 @@ export const Onboarding: React.FC = () => {
         target: parseFloat(goalTarget),
         targetDate: new Date(Date.now() + 60 * 86400000).toISOString().slice(0, 10),
         roundUpEnabled: true,
-        coverColor: '#D4AF37',
+        coverColor: '#3B82F6',
       });
     }
   };
@@ -93,7 +93,7 @@ export const Onboarding: React.FC = () => {
   return (
     <div
       className={`min-h-screen w-full flex flex-col justify-between p-6 ${
-        isDark ? 'bg-[#08090C] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'
+        isDark ? 'bg-[#05070E] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'
       }`}
     >
       {/* Brand Header */}
@@ -102,7 +102,7 @@ export const Onboarding: React.FC = () => {
           <span className="font-serif-display text-3xl font-light tracking-[0.05em]">
             Chillar
           </span>
-          <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+          <span className="w-2 h-2 rounded-full bg-blue-500 shadow-sm shadow-blue-500/50" />
         </div>
         <p className={`text-xs ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
           Every rupee, accounted for.
@@ -115,7 +115,7 @@ export const Onboarding: React.FC = () => {
               key={s}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 s === step
-                  ? 'w-8 bg-[#D4AF37]'
+                  ? 'w-8 bg-blue-500 shadow-sm shadow-blue-500/50'
                   : s < step
                   ? 'w-4 bg-[#10B981]'
                   : isDark
@@ -139,7 +139,7 @@ export const Onboarding: React.FC = () => {
               className="flex flex-col gap-5"
             >
               <div>
-                <span className="meta-label text-[#D4AF37] block mb-1">Step 1 of 3</span>
+                <span className="meta-label text-blue-400 block mb-1">Step 1 of 3</span>
                 <h3 className="font-serif-display text-2xl font-light">
                   Your monthly money
                 </h3>
@@ -160,8 +160,8 @@ export const Onboarding: React.FC = () => {
                     onChange={(e) => setAllowance(e.target.value)}
                     className={`w-full px-4 py-3 rounded-2xl border font-serif-display text-2xl tnum outline-none ${
                       isDark
-                        ? 'bg-[#10121A] border-white/10 text-[#D4AF37]'
-                        : 'bg-white border-black/10 text-[#D4AF37]'
+                        ? 'bg-[#0B0F19] border-white/10 text-blue-400 focus:border-blue-500'
+                        : 'bg-white border-black/10 text-blue-600 focus:border-blue-500'
                     }`}
                   />
                 </div>
@@ -175,7 +175,7 @@ export const Onboarding: React.FC = () => {
                     value={extraIncome}
                     onChange={(e) => setExtraIncome(e.target.value)}
                     className={`w-full px-4 py-2.5 rounded-2xl border text-sm font-serif-display tnum outline-none ${
-                      isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
+                      isDark ? 'bg-[#0B0F19] border-white/10 text-white' : 'bg-white border-black/10'
                     }`}
                   />
                 </div>
@@ -188,11 +188,11 @@ export const Onboarding: React.FC = () => {
                     value={payDay}
                     onChange={(e) => setPayDay(e.target.value)}
                     className={`w-full px-4 py-2.5 rounded-2xl border text-xs outline-none ${
-                      isDark ? 'bg-[#10121A] border-white/10 text-white' : 'bg-white border-black/10'
+                      isDark ? 'bg-[#0B0F19] border-white/10 text-white' : 'bg-white border-black/10'
                     }`}
                   >
                     {[1, 5, 10, 15, 20, 25, 30].map((d) => (
-                      <option key={d} value={d} className={isDark ? 'bg-[#10121A]' : 'bg-white'}>
+                      <option key={d} value={d} className={isDark ? 'bg-[#0B0F19]' : 'bg-white'}>
                         {d}st / {d}th of every month
                       </option>
                     ))}
@@ -211,7 +211,7 @@ export const Onboarding: React.FC = () => {
               className="flex flex-col gap-4"
             >
               <div>
-                <span className="meta-label text-[#D4AF37] block mb-1">Step 2 of 3</span>
+                <span className="meta-label text-blue-400 block mb-1">Step 2 of 3</span>
                 <h3 className="font-serif-display text-2xl font-light">
                   Fixed Costs & Mess
                 </h3>
@@ -229,7 +229,7 @@ export const Onboarding: React.FC = () => {
                       fc.isPrepaidMess
                         ? 'border-[#10B981]/30 bg-[#10B981]/5'
                         : isDark
-                        ? 'border-white/5 bg-[#10121A]'
+                        ? 'border-white/5 bg-[#0B0F19]'
                         : 'border-black/5 bg-white'
                     }`}
                   >
@@ -267,7 +267,7 @@ export const Onboarding: React.FC = () => {
                   value={customCostName}
                   onChange={(e) => setCustomCostName(e.target.value)}
                   className={`px-3 py-2 rounded-xl border text-xs outline-none ${
-                    isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
+                    isDark ? 'bg-[#0B0F19] border-white/10' : 'bg-white border-black/10'
                   }`}
                 />
                 <div className="flex gap-1">
@@ -277,13 +277,13 @@ export const Onboarding: React.FC = () => {
                     value={customCostAmount}
                     onChange={(e) => setCustomCostAmount(e.target.value)}
                     className={`flex-1 px-3 py-2 rounded-xl border text-xs outline-none ${
-                      isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
+                      isDark ? 'bg-[#0B0F19] border-white/10' : 'bg-white border-black/10'
                     }`}
                   />
                   <button
                     type="button"
                     onClick={handleAddCost}
-                    className="px-3 rounded-xl bg-[#D4AF37]/20 text-[#D4AF37] hover:bg-[#D4AF37]/30 text-xs font-medium"
+                    className="px-3 rounded-xl bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 text-xs font-medium"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
@@ -301,7 +301,7 @@ export const Onboarding: React.FC = () => {
               className="flex flex-col gap-4"
             >
               <div>
-                <span className="meta-label text-[#D4AF37] block mb-1">Step 3 of 3</span>
+                <span className="meta-label text-blue-400 block mb-1">Step 3 of 3</span>
                 <h3 className="font-serif-display text-2xl font-light">
                   Savings & First Goal
                 </h3>
@@ -323,9 +323,9 @@ export const Onboarding: React.FC = () => {
                       onClick={() => setSavingsRate(rate)}
                       className={`py-2 rounded-xl text-xs font-medium border transition-all ${
                         savingsRate === rate
-                          ? 'border-[#D4AF37] bg-[#D4AF37]/20 text-[#D4AF37]'
+                          ? 'border-blue-500 bg-blue-500/20 text-blue-400'
                           : isDark
-                          ? 'border-white/5 bg-[#10121A] text-[#94A3B8]'
+                          ? 'border-white/5 bg-[#0B0F19] text-[#94A3B8]'
                           : 'border-black/5 bg-white text-[#64748B]'
                       }`}
                     >
@@ -346,7 +346,7 @@ export const Onboarding: React.FC = () => {
                   onChange={(e) => setGoalName(e.target.value)}
                   placeholder="e.g. Goa Trip, New Phone"
                   className={`w-full px-3.5 py-2.5 rounded-xl border text-sm outline-none ${
-                    isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
+                    isDark ? 'bg-[#0B0F19] border-white/10' : 'bg-white border-black/10'
                   }`}
                 />
                 <input
@@ -355,7 +355,7 @@ export const Onboarding: React.FC = () => {
                   onChange={(e) => setGoalTarget(e.target.value)}
                   placeholder="Target (₹)"
                   className={`w-full px-3.5 py-2.5 rounded-xl border font-serif-display text-lg tnum outline-none ${
-                    isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
+                    isDark ? 'bg-[#0B0F19] border-white/10' : 'bg-white border-black/10'
                   }`}
                 />
               </div>
@@ -363,10 +363,10 @@ export const Onboarding: React.FC = () => {
               {/* Calculated Spendable Summary */}
               <Card
                 variant="elevated"
-                className="border-[#D4AF37]/30 bg-[#D4AF37]/5 p-4 flex flex-col gap-1 text-center"
+                className="border-blue-500/30 bg-blue-500/5 p-4 flex flex-col gap-1 text-center"
               >
                 <span className="meta-label text-[#94A3B8]">Auto-Computed Monthly Spendable</span>
-                <span className="font-serif-display text-3xl text-[#D4AF37] tnum">
+                <span className="font-serif-display text-3xl text-blue-400 tnum">
                   {formatINR(spendable)}
                 </span>
                 <span className="text-[11px] text-[#94A3B8]">
@@ -395,7 +395,7 @@ export const Onboarding: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep((s) => (s + 1) as 2 | 3)}
-              className="flex-1 py-3.5 rounded-2xl bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] font-serif-display text-base tracking-wide font-medium flex items-center justify-center gap-2 transition-colors shadow-sm"
+              className="flex-1 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-serif-display text-base tracking-wide font-medium flex items-center justify-center gap-2 transition-colors shadow-lg shadow-blue-500/20"
             >
               <span>Continue</span>
               <ArrowRight strokeWidth={1.5} className="w-4 h-4" />
@@ -404,7 +404,7 @@ export const Onboarding: React.FC = () => {
             <button
               type="button"
               onClick={handleFinish}
-              className="flex-1 py-3.5 rounded-2xl bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] font-serif-display text-base tracking-wide font-medium flex items-center justify-center gap-2 transition-colors shadow-sm"
+              className="flex-1 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-serif-display text-base tracking-wide font-medium flex items-center justify-center gap-2 transition-colors shadow-lg shadow-blue-500/20"
             >
               <span>Enter Chillar</span>
               <Check strokeWidth={1.5} className="w-4 h-4" />
@@ -417,7 +417,7 @@ export const Onboarding: React.FC = () => {
           type="button"
           onClick={handleFinish}
           className={`py-2 text-xs transition-colors flex items-center justify-center gap-1.5 ${
-            isDark ? 'text-[#94A3B8] hover:text-[#D4AF37]' : 'text-[#64748B] hover:text-[#D4AF37]'
+            isDark ? 'text-[#94A3B8] hover:text-blue-400' : 'text-[#64748B] hover:text-blue-600'
           }`}
         >
           <span>Skip setup & start with blank ledger</span>

@@ -6,7 +6,7 @@ interface ProgressBarProps {
   value: number; // 0 to 100+
   max?: number;
   height?: number;
-  color?: 'gold' | 'sage' | 'terracotta' | 'auto';
+  color?: 'blue' | 'gold' | 'sage' | 'terracotta' | 'auto';
   showPaceMarker?: boolean;
   paceMarkerPosition?: number; // 0 to 100%
   className?: string;
@@ -17,7 +17,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   value,
   max = 100,
   height = 6,
-  color = 'gold',
+  color = 'blue',
   showPaceMarker = false,
   paceMarkerPosition = 0,
   className = '',
@@ -28,13 +28,15 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   const percentage = Math.min(100, Math.max(0, (value / max) * 100));
   const markerPct = Math.min(100, Math.max(0, paceMarkerPosition));
 
-  let barBg = 'bg-[#D4AF37]';
-  if (color === 'sage') barBg = 'bg-[#10B981]';
-  if (color === 'terracotta' || isOverCap || percentage >= 100) barBg = 'bg-[#F43F5E]';
+  let barBg = 'bg-blue-500';
+  if (color === 'gold') barBg = 'bg-blue-400';
+  if (color === 'blue') barBg = 'bg-blue-500';
+  if (color === 'sage') barBg = 'bg-emerald-400';
+  if (color === 'terracotta' || isOverCap || percentage >= 100) barBg = 'bg-rose-500';
   if (color === 'auto') {
-    if (percentage > 90) barBg = 'bg-[#F43F5E]';
-    else if (percentage > 70) barBg = 'bg-[#D4AF37]';
-    else barBg = 'bg-[#10B981]';
+    if (percentage > 90) barBg = 'bg-rose-500';
+    else if (percentage > 70) barBg = 'bg-blue-400';
+    else barBg = 'bg-emerald-400';
   }
 
   const trackBg = isDark ? 'bg-white/[0.08]' : 'bg-black/[0.06]';

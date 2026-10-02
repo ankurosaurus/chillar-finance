@@ -15,6 +15,7 @@ import {
   Flame,
   ArrowUpRight,
   ArrowDownRight,
+  FileText,
 } from 'lucide-react';
 import { Card } from '../components/Card';
 import { useFinanceStore } from '../store/useFinanceStore';
@@ -28,10 +29,15 @@ import {
 import { formatINR } from '../lib/formatters';
 import { useTheme } from '../hooks/useTheme';
 import { format, subDays } from 'date-fns';
+import { generateMonthlyReportPDF } from '../lib/pdfReport';
 
 export const Insights: React.FC = () => {
   const transactions = useFinanceStore((state) => state.transactions);
   const categories = useFinanceStore((state) => state.categories);
+  const profile = useFinanceStore((state) => state.profile);
+  const goals = useFinanceStore((state) => state.goals);
+  const dayPlans = useFinanceStore((state) => state.dayPlans);
+  const currentUser = useFinanceStore((state) => state.currentUser);
   const { isDark } = useTheme();
 
   const [trendView, setTrendView] = useState<'weekly' | 'monthly'>('weekly');
@@ -100,19 +106,40 @@ export const Insights: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6 pb-24 md:pb-12">
-      {/* Title */}
-      <div className="pt-1">
-        <h2 className="font-serif-display text-2xl sm:text-3xl font-light">Insights & Leaks</h2>
-        <span className="text-xs text-[#94A3B8]">
-          Hostel spend velocity, peak days, & leak reports
-        </span>
+      {/* Title & Action Bar */}
+      <div className="pt-1 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h2 className="font-serif-display text-2xl sm:text-3xl font-light">Insights & Leaks</h2>
+          <span className="text-xs text-slate-400">
+            Hostel spend velocity, peak days, & leak reports
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() =>
+            generateMonthlyReportPDF({
+              monthDate: today,
+              profile,
+              transactions,
+              categories,
+              goals,
+              dayPlans,
+              username: currentUser?.fullName || currentUser?.username || 'Hostel Student',
+            })
+          }
+          className="self-start sm:self-auto inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 active:scale-95 text-white text-xs font-semibold shadow-md shadow-blue-600/25 transition-all"
+        >
+          <FileText className="w-3.5 h-3.5" />
+          <span>Export Monthly Statement (PDF)</span>
+        </button>
       </div>
 
       {transactions.length === 0 ? (
         <Card className="text-center py-12 flex flex-col items-center gap-2 border-dashed">
-          <Sparkles className="w-6 h-6 text-[#D4AF37] mb-1" />
+          <Sparkles className="w-6 h-6 text-blue-400 mb-1" />
           <h4 className="font-serif-display text-lg font-light">Awaiting First Transactions</h4>
-          <p className={`text-xs max-w-sm ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
+          <p className={`text-xs max-w-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             Charts, micro leak reports, and dining heatmaps will populate automatically as you record your daily expenses.
           </p>
         </Card>
@@ -124,25 +151,25 @@ export const Insights: React.FC = () => {
               <Card
                 key={ins.id}
                 variant="surface"
-                className="border-l-4 border-l-[#D4AF37] p-4 flex items-start justify-between gap-3"
+                className="border-l-4 border-l-blue-500 p-4 flex items-start justify-between gap-3"
               >
                 <div>
                   <div className="flex items-center gap-1.5 mb-1">
-                    <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+                    <Sparkles className="w-3.5 h-3.5 text-blue-400" />
                     <h4 className="text-xs font-medium tracking-wide">
                       {ins.title}
                     </h4>
                   </div>
                   <p
                     className={`text-xs leading-relaxed ${
-                      isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'
+                      isDark ? 'text-slate-400' : 'text-slate-600'
                     }`}
                   >
                     {ins.description}
                   </p>
                 </div>
                 {ins.metric && (
-                  <span className="meta-label shrink-0 px-2 py-1 rounded-full bg-[#D4AF37]/15 text-[#D4AF37]">
+                  <span className="meta-label shrink-0 px-2 py-1 rounded-full bg-blue-500/15 text-blue-400">
                     {ins.metric}
                   </span>
                 )}
@@ -156,7 +183,7 @@ export const Insights: React.FC = () => {
             <Card variant="surface" className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="meta-label text-[#94A3B8] block">Spending Trend</span>
+                  <span className="meta-label text-slate-400 block">Spending Trend</span>
                   <span className="font-serif-display text-lg font-light">
                     Velocity Flow
                   </span>
@@ -165,8 +192,8 @@ export const Insights: React.FC = () => {
                 <div
                   className={`p-1 rounded-full border flex items-center text-xs ${
                     isDark
-                      ? 'bg-[#181B26] border-white/5'
-                      : 'bg-[#F1F5F9] border-black/5'
+                      ? 'bg-[#0B0F19] border-white/5'
+                      : 'bg-slate-100 border-slate-200'
                   }`}
                 >
                   <button
@@ -174,8 +201,8 @@ export const Insights: React.FC = () => {
                     onClick={() => setTrendView('weekly')}
                     className={`px-3 py-1 rounded-full font-medium transition-all ${
                       trendView === 'weekly'
-                        ? 'bg-[#08090C] text-[#D4AF37]'
-                        : 'text-[#94A3B8]'
+                        ? 'bg-[#05070E] text-blue-400 shadow-xs'
+                        : 'text-slate-400'
                     }`}
                   >
                     7 Days
@@ -185,8 +212,8 @@ export const Insights: React.FC = () => {
                     onClick={() => setTrendView('monthly')}
                     className={`px-3 py-1 rounded-full font-medium transition-all ${
                       trendView === 'monthly'
-                        ? 'bg-[#08090C] text-[#D4AF37]'
-                        : 'text-[#94A3B8]'
+                        ? 'bg-[#05070E] text-blue-400 shadow-xs'
+                        : 'text-slate-400'
                     }`}
                   >
                     Month
@@ -199,9 +226,9 @@ export const Insights: React.FC = () => {
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={trendData} margin={{ top: 5, right: 10, left: -25, bottom: 0 }}>
                     <defs>
-                      <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#D4AF37" stopOpacity={0.4} />
-                        <stop offset="95%" stopColor="#D4AF37" stopOpacity={0.0} />
+                      <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.4} />
+                        <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.0} />
                       </linearGradient>
                     </defs>
                     <XAxis
@@ -226,12 +253,12 @@ export const Insights: React.FC = () => {
                             <div
                               className={`p-2.5 rounded-xl text-xs border ${
                                 isDark
-                                  ? 'bg-[#10121A] border-white/10 text-white'
-                                  : 'bg-white border-black/10 text-black'
+                                  ? 'bg-[#0B0F19] border-white/10 text-white'
+                                  : 'bg-white border-slate-200 text-slate-900'
                               }`}
                             >
-                              <span className="text-[#94A3B8] block">{data.label}</span>
-                              <span className="font-serif-display text-sm text-[#D4AF37]">
+                              <span className="text-slate-400 block">{data.label}</span>
+                              <span className="font-serif-display text-sm text-blue-400 font-semibold">
                                 {formatINR(data.spent)}
                               </span>
                             </div>
@@ -243,10 +270,10 @@ export const Insights: React.FC = () => {
                     <Area
                       type="monotone"
                       dataKey="spent"
-                      stroke="#D4AF37"
+                      stroke="#3B82F6"
                       strokeWidth={2}
                       fillOpacity={1}
-                      fill="url(#goldGradient)"
+                      fill="url(#blueGradient)"
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -256,7 +283,7 @@ export const Insights: React.FC = () => {
             {/* Category Breakdown Donut */}
             <Card variant="surface" className="flex flex-col gap-4">
               <div>
-                <span className="meta-label text-[#94A3B8] block">Portfolio Distribution</span>
+                <span className="meta-label text-slate-400 block">Portfolio Distribution</span>
                 <span className="font-serif-display text-lg font-light">
                   Expense Breakdown
                 </span>
@@ -296,7 +323,7 @@ export const Insights: React.FC = () => {
                         <span className="truncate max-w-[140px]">{item.name}</span>
                       </div>
                       <div className="flex items-center gap-2 tnum">
-                        <span className="text-[#94A3B8]">{item.percentage}%</span>
+                        <span className="text-slate-400">{item.percentage}%</span>
                         <span className="font-medium">{formatINR(item.amount)}</span>
                       </div>
                     </div>
@@ -312,18 +339,18 @@ export const Insights: React.FC = () => {
             <Card variant="surface" className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="meta-label text-[#94A3B8] block">Micro Leak Report</span>
+                  <span className="meta-label text-slate-400 block">Micro Leak Report</span>
                   <span className="font-serif-display text-lg font-light">
                     Small Recurring Spends
                   </span>
                 </div>
-                <span className="meta-label text-[#F43F5E] bg-[#F43F5E]/10 px-2 py-0.5 rounded-full">
+                <span className="meta-label text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full">
                   Tapri & Night Bites
                 </span>
               </div>
 
               {leakReport.length === 0 ? (
-                <p className="text-xs text-[#94A3B8] py-4">
+                <p className="text-xs text-slate-400 py-4">
                   No recurring micro leaks detected yet.
                 </p>
               ) : (
@@ -334,17 +361,17 @@ export const Insights: React.FC = () => {
                         <h4 className="text-xs font-medium tracking-tight">
                           {leak.name}
                         </h4>
-                        <span className="text-[11px] text-[#94A3B8]">
+                        <span className="text-[11px] text-slate-400">
                           {leak.count} times logged ({formatINR(leak.totalSpent)} total)
                         </span>
-                        <div className="mt-1 inline-flex items-center gap-1 text-[11px] text-[#D4AF37] font-serif-display">
+                        <div className="mt-1 inline-flex items-center gap-1 text-[11px] text-blue-400 font-serif-display">
                           <span>Extrapolates to {formatINR(leak.extrapolatedMonthly)}/mo</span>
                           <span>{leak.equivalentComparison}</span>
                         </div>
                       </div>
 
                       <div className="text-right">
-                        <span className="font-serif-display text-base tnum text-[#F43F5E]">
+                        <span className="font-serif-display text-base tnum text-rose-400">
                           {formatINR(leak.totalSpent)}
                         </span>
                       </div>
@@ -358,12 +385,12 @@ export const Insights: React.FC = () => {
             <Card variant="surface" className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="meta-label text-[#94A3B8] block">Dining Heatmap</span>
+                  <span className="meta-label text-slate-400 block">Dining Heatmap</span>
                   <span className="font-serif-display text-lg font-light">
                     Outside Food Weekly Rhythm
                   </span>
                 </div>
-                <Flame strokeWidth={1.5} className="w-4 h-4 text-[#D4AF37]" />
+                <Flame strokeWidth={1.5} className="w-4 h-4 text-blue-400" />
               </div>
 
               <div className="grid grid-cols-7 gap-1.5 pt-2 text-center">
@@ -374,14 +401,14 @@ export const Insights: React.FC = () => {
                         ? 'bg-white/5'
                         : 'bg-black/5'
                       : d.intensity > 0.6
-                      ? 'bg-[#D4AF37] text-[#08090C] font-semibold'
+                      ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/30'
                       : d.intensity > 0.3
-                      ? 'bg-[#D4AF37]/50 text-white'
-                      : 'bg-[#D4AF37]/20 text-[#D4AF37]';
+                      ? 'bg-blue-600/50 text-white'
+                      : 'bg-blue-500/20 text-blue-400';
 
                   return (
                     <div key={d.shortDay} className="flex flex-col items-center gap-1.5">
-                      <span className="text-[10px] text-[#94A3B8]">{d.shortDay}</span>
+                      <span className="text-[10px] text-slate-400">{d.shortDay}</span>
                       <div
                         className={`w-full h-12 rounded-xl flex flex-col items-center justify-center text-[11px] transition-colors ${bg}`}
                       >
@@ -393,8 +420,8 @@ export const Insights: React.FC = () => {
                   );
                 })}
               </div>
-              <p className="text-[11px] text-[#94A3B8] text-center pt-1">
-                Lustrous gold indicates peak outside food order volume
+              <p className="text-[11px] text-slate-400 text-center pt-1">
+                Electric sapphire indicates peak outside food order volume
               </p>
             </Card>
           </div>
@@ -402,7 +429,7 @@ export const Insights: React.FC = () => {
           {/* Month-vs-Month Comparison */}
           <Card variant="surface" className="flex flex-col gap-3">
             <div>
-              <span className="meta-label text-[#94A3B8] block">Month-over-Month</span>
+              <span className="meta-label text-slate-400 block">Month-over-Month</span>
               <span className="font-serif-display text-lg font-light">
                 {mom.prevMonthName} vs {mom.currentMonthName}
               </span>
@@ -410,32 +437,32 @@ export const Insights: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-3 pt-1">
               <div className="p-3.5 rounded-2xl border border-inherit">
-                <span className="meta-label text-[#94A3B8] block mb-1">
+                <span className="meta-label text-slate-400 block mb-1">
                   {mom.prevMonthName} Total
                 </span>
                 <span className="font-serif-display text-xl sm:text-2xl tnum">
                   {formatINR(mom.prevTotalSpent)}
                 </span>
-                <span className="text-[11px] text-[#94A3B8] block mt-0.5">
+                <span className="text-[11px] text-slate-400 block mt-0.5">
                   Outside: {formatINR(mom.outsideFoodPrev)}
                 </span>
               </div>
 
               <div className="p-3.5 rounded-2xl border border-inherit">
-                <span className="meta-label text-[#94A3B8] block mb-1">
+                <span className="meta-label text-slate-400 block mb-1">
                   {mom.currentMonthName} Total
                 </span>
-                <span className="font-serif-display text-xl sm:text-2xl tnum text-[#D4AF37]">
+                <span className="font-serif-display text-xl sm:text-2xl tnum text-blue-400">
                   {formatINR(mom.currentTotalSpent)}
                 </span>
                 <div className="flex items-center gap-1 text-[11px] mt-0.5">
                   {mom.diffAmount <= 0 ? (
-                    <span className="text-[#10B981] flex items-center">
+                    <span className="text-emerald-400 flex items-center">
                       <ArrowDownRight className="w-3 h-3" />
                       {Math.abs(mom.diffPercentage)}% less spend
                     </span>
                   ) : (
-                    <span className="text-[#F43F5E] flex items-center">
+                    <span className="text-rose-400 flex items-center">
                       <ArrowUpRight className="w-3 h-3" />
                       +{mom.diffPercentage}% higher spend
                     </span>

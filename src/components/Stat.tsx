@@ -22,7 +22,7 @@ export const Stat: React.FC<StatProps> = ({
 
   const textColor =
     variant === 'gold'
-      ? 'text-[#D4AF37]'
+      ? 'text-blue-500'
       : variant === 'sage'
       ? 'text-[#10B981]'
       : variant === 'terracotta'

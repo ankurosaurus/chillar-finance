@@ -7,6 +7,7 @@ import { AlertBanner } from './components/AlertBanner';
 import { QuickAddModal } from './components/QuickAddModal';
 import { AffordabilityModal } from './components/AffordabilityModal';
 import { LockScreen } from './components/LockScreen';
+import { AuthScreen } from './components/AuthScreen';
 import { Onboarding } from './pages/Onboarding';
 import { Home } from './pages/Home';
 import { Ledger } from './pages/Ledger';
@@ -16,11 +17,17 @@ import { Insights } from './pages/Insights';
 import { Settings } from './pages/Settings';
 
 export const App: React.FC = () => {
+  const currentUser = useFinanceStore((state) => state.currentUser);
   const profile = useFinanceStore((state) => state.profile);
   const isLocked = useFinanceStore((state) => state.isLocked);
   const activeTab = useFinanceStore((state) => state.activeTab);
   const setActiveTab = useFinanceStore((state) => state.setActiveTab);
   const { isDark } = useTheme();
+
+  // If user is not logged in, show AuthScreen (Username + Password)
+  if (!currentUser) {
+    return <AuthScreen />;
+  }
 
   // If user has not completed onboarding, show onboarding flow
   if (!profile.onboardingCompleted) {
@@ -35,7 +42,7 @@ export const App: React.FC = () => {
   return (
     <div
       className={`min-h-screen w-full flex flex-col items-center transition-colors duration-200 ${
-        isDark ? 'bg-[#08090C] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'
+        isDark ? 'bg-[#05070E] text-white' : 'bg-[#F8FAFC] text-[#0F172A]'
       }`}
     >
       {/* Desktop & Mobile Responsive Canvas */}

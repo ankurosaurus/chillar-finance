@@ -33,17 +33,17 @@ export const LockScreen: React.FC = () => {
   };
 
   const keyBg = isDark
-    ? 'bg-[#181B26] hover:bg-[#202433] active:bg-[#282D40] text-[#F8FAFC]'
+    ? 'bg-[#0B0F19] hover:bg-[#111827] active:bg-[#1E293B] text-[#F8FAFC]'
     : 'bg-[#F1F5F9] hover:bg-[#E2E8F0] active:bg-[#CBD5E1] text-[#0F172A]';
 
   const borderClass = isDark
-    ? 'border-[rgba(255,255,255,0.08)]'
+    ? 'border-white/10'
     : 'border-[rgba(15,23,42,0.08)]';
 
   return (
     <div
       className={`fixed inset-0 z-50 flex flex-col items-center justify-between py-12 px-6 ${
-        isDark ? 'bg-[#08090C] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'
+        isDark ? 'bg-[#05070E] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'
       }`}
     >
       {/* Brand & Tagline */}
@@ -52,7 +52,7 @@ export const LockScreen: React.FC = () => {
           <span className="font-serif-display text-4xl tracking-[0.05em] font-light">
             Chillar
           </span>
-          <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+          <span className="w-2 h-2 rounded-full bg-blue-500 shadow-sm shadow-blue-500/50" />
         </div>
         <p className={`text-xs ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
           Every rupee, accounted for.
@@ -62,7 +62,7 @@ export const LockScreen: React.FC = () => {
       {/* PIN Dots with shake on error */}
       <div className="flex flex-col items-center my-auto">
         <div className="flex items-center gap-2 mb-6 text-xs meta-label text-[#94A3B8]">
-          <Lock strokeWidth={1.5} className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <Lock strokeWidth={1.5} className="w-3.5 h-3.5 text-blue-500" />
           <span>Enter 4-Digit Passcode</span>
         </div>
 
@@ -78,7 +78,7 @@ export const LockScreen: React.FC = () => {
                 key={idx}
                 className={`w-3.5 h-3.5 rounded-full transition-all duration-200 border ${
                   isFilled
-                    ? 'bg-[#D4AF37] border-[#D4AF37] scale-110'
+                    ? 'bg-blue-500 border-blue-500 scale-110 shadow-sm shadow-blue-500/50'
                     : isError
                     ? 'border-[#F43F5E] bg-[#F43F5E]/20'
                     : isDark

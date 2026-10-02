@@ -126,7 +126,7 @@ export const QuickAddModal: React.FC = () => {
             transition={{ duration: 0.1 }}
             className="font-serif-display text-5xl md:text-6xl font-light tnum tracking-tight"
           >
-            <span className={txType === 'income' ? 'text-[#10B981]' : 'text-[#D4AF37]'}>
+            <span className={txType === 'income' ? 'text-[#10B981]' : 'text-blue-500'}>
               {formatINR(amount, { showSymbol: true })}
             </span>
           </motion.div>
@@ -139,7 +139,7 @@ export const QuickAddModal: React.FC = () => {
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="mx-auto text-center px-4 py-1.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/30 text-xs text-[#D4AF37] flex items-center gap-1.5"
+              className="mx-auto text-center px-4 py-1.5 rounded-full bg-blue-500/15 border border-blue-500/30 text-xs text-blue-400 flex items-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>{feedbackNudge || 'Logged successfully'}</span>
@@ -197,8 +197,8 @@ export const QuickAddModal: React.FC = () => {
                 onChange={(e) => setNote(e.target.value)}
                 className={`w-full px-3.5 py-2.5 rounded-2xl border text-sm outline-none transition-colors ${
                   isDark
-                    ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#F8FAFC] focus:border-[#D4AF37]'
-                    : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A] focus:border-[#D4AF37]'
+                    ? 'bg-[#0B0F19] border-white/10 text-[#F8FAFC] focus:border-blue-500'
+                    : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A] focus:border-blue-500'
                 }`}
               />
 
@@ -213,7 +213,7 @@ export const QuickAddModal: React.FC = () => {
                       onClick={() => setPaymentMode(mode)}
                       className={`flex-1 py-1.5 text-xs rounded-xl font-medium transition-all ${
                         paymentMode === mode
-                          ? 'bg-[#D4AF37] text-[#08090C]'
+                          ? 'bg-blue-600 text-white shadow-sm'
                           : 'text-[#94A3B8]'
                       }`}
                     >
@@ -229,7 +229,7 @@ export const QuickAddModal: React.FC = () => {
                   onChange={(e) => setDateStr(e.target.value)}
                   className={`px-3 py-1.5 rounded-2xl border text-xs outline-none ${
                     isDark
-                      ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#F8FAFC]'
+                      ? 'bg-[#0B0F19] border-white/10 text-[#F8FAFC]'
                       : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A]'
                   }`}
                 />
@@ -245,7 +245,7 @@ export const QuickAddModal: React.FC = () => {
           disabled={amount <= 0 || justSaved}
           className={`w-full py-4 rounded-2xl font-serif-display text-lg tracking-wide flex items-center justify-center gap-2 transition-all duration-150 active:scale-[0.98] ${
             amount > 0
-              ? 'bg-[#D4AF37] text-[#08090C] shadow-md hover:bg-[#E5C358]'
+              ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20'
               : 'bg-white/10 text-[#94A3B8] cursor-not-allowed'
           }`}
         >

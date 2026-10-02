@@ -16,10 +16,10 @@ export const Navbar: React.FC = () => {
   const setActiveTab = useFinanceStore((state) => state.setActiveTab);
   const setQuickAddOpen = useFinanceStore((state) => state.setQuickAddOpen);
 
-  const barBg = isDark ? 'bg-[#10121A]/95' : 'bg-[#FFFFFF]/95';
+  const barBg = isDark ? 'bg-[#0B0F19]/95' : 'bg-[#FFFFFF]/95';
   const borderClass = isDark
-    ? 'border-t border-[rgba(255,255,255,0.08)]'
-    : 'border-t border-[rgba(15,23,42,0.08)]';
+    ? 'border-t border-white/10'
+    : 'border-t border-slate-200';
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none pb-safe">
@@ -32,10 +32,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('home')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'home'
-              ? 'text-[#D4AF37]'
+              ? 'text-blue-400'
               : isDark
-              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
-              : 'text-[#64748B] hover:text-[#0F172A]'
+              ? 'text-slate-400 hover:text-white'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
           aria-label="Home"
         >
@@ -48,10 +48,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('ledger')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'ledger'
-              ? 'text-[#D4AF37]'
+              ? 'text-blue-400'
               : isDark
-              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
-              : 'text-[#64748B] hover:text-[#0F172A]'
+              ? 'text-slate-400 hover:text-white'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
           aria-label="Ledger"
         >
@@ -64,7 +64,7 @@ export const Navbar: React.FC = () => {
           <button
             type="button"
             onClick={() => setQuickAddOpen(true)}
-            className="w-13 h-13 rounded-full bg-[#D4AF37] hover:bg-[#E5C358] active:scale-95 text-[#08090C] flex items-center justify-center shadow-lg transition-transform duration-150 border-2 border-[#08090C]"
+            className="w-13 h-13 rounded-full bg-blue-600 hover:bg-blue-500 active:scale-95 text-white flex items-center justify-center shadow-lg shadow-blue-600/30 transition-all duration-150 border-2 border-[#05070E]"
             aria-label="Quick Add"
           >
             <Plus strokeWidth={2} className="w-6 h-6" />
@@ -77,10 +77,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('planner')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'planner'
-              ? 'text-[#D4AF37]'
+              ? 'text-blue-400'
               : isDark
-              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
-              : 'text-[#64748B] hover:text-[#0F172A]'
+              ? 'text-slate-400 hover:text-white'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
           aria-label="Day Planner"
         >
@@ -93,10 +93,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('goals')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'goals'
-              ? 'text-[#D4AF37]'
+              ? 'text-blue-400'
               : isDark
-              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
-              : 'text-[#64748B] hover:text-[#0F172A]'
+              ? 'text-slate-400 hover:text-white'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
           aria-label="Goals"
         >
@@ -109,10 +109,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('insights')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'insights'
-              ? 'text-[#D4AF37]'
+              ? 'text-blue-400'
               : isDark
-              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
-              : 'text-[#64748B] hover:text-[#0F172A]'
+              ? 'text-slate-400 hover:text-white'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
           aria-label="Insights"
         >

@@ -21,7 +21,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     name: 'Snacks & Chai',
     monthlyLimit: 1000,
     softCap: true,
-    color: '#D4AF37', // metallic gold
+    color: '#F59E0B', // warm amber
     isSystem: true,
   },
   {
@@ -87,7 +87,7 @@ export const INITIAL_PROFILE: Profile = {
   ],
   savingsRatePct: 20,
   theme: 'dark',
-  accentColor: 'gold',
+  accentColor: 'blue',
   rolloverToFunOrGoals: false,
   onboardingCompleted: false, // forces onboarding on first run
 };
@@ -119,7 +119,7 @@ export function getDemoGoals(): Goal[] {
       saved: 3200,
       targetDate: goaDate,
       roundUpEnabled: true,
-      coverColor: '#D4AF37',
+      coverColor: '#3B82F6',
       contributions: [
         {
           id: 'gc-1',

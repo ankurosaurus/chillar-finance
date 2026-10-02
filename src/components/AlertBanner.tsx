@@ -15,7 +15,7 @@ export const AlertBanner: React.FC = () => {
     <div className="w-full flex flex-col gap-2 my-2 px-1">
       <AnimatePresence>
         {alerts.slice(0, 3).map((alert) => {
-          let accentColor = 'border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37]';
+          let accentColor = 'border-blue-500/30 bg-blue-500/10 text-blue-400';
           let IconComponent = Info;
 
           if (alert.type === 'category_100' || alert.type === 'week_exhausted') {

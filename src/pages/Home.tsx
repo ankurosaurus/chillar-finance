@@ -55,8 +55,8 @@ export const Home: React.FC = () => {
     <div className="flex flex-col gap-6 pb-24 md:pb-12">
       {/* Top Banner / Streak Chip */}
       <div className="flex items-center justify-between pt-1">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/30 text-xs font-medium text-[#D4AF37]">
-          <Flame strokeWidth={1.5} className="w-4 h-4 fill-[#D4AF37]/20" />
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-600/15 border border-blue-500/30 text-xs font-medium text-blue-400">
+          <Flame strokeWidth={1.5} className="w-4 h-4 fill-blue-500/20 text-blue-400" />
           <span>No outside food: {outsideFoodStreak} day{outsideFoodStreak !== 1 ? 's' : ''}</span>
         </div>
 
@@ -64,7 +64,7 @@ export const Home: React.FC = () => {
           type="button"
           onClick={() => setActiveTab('planner')}
           className={`text-xs ${
-            isDark ? 'text-[#94A3B8] hover:text-[#F8FAFC]' : 'text-[#64748B] hover:text-[#0F172A]'
+            isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'
           } flex items-center gap-0.5`}
         >
           <span>Day Planner</span>
@@ -76,7 +76,7 @@ export const Home: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {/* 1. Hero: "Safe to spend today" */}
         <Card variant="surface" className="text-center py-7 px-4 relative overflow-hidden flex flex-col justify-center">
-          <span className="meta-label text-[#94A3B8] tracking-widest mb-1.5 block">
+          <span className="meta-label text-slate-400 tracking-widest mb-1.5 block">
             Safe to spend today
           </span>
 
@@ -84,17 +84,17 @@ export const Home: React.FC = () => {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="font-serif-display text-5xl md:text-6xl font-light tnum text-[#D4AF37] my-1"
+            className="font-serif-display text-5xl md:text-6xl font-light tnum text-blue-400 my-1"
           >
             {formatINR(weekly.safeToSpendToday)}
           </motion.div>
 
-          <p className={`text-xs mt-2 ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
+          <p className={`text-xs mt-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             ₹{weekly.remainingThisWeek.toLocaleString('en-IN')} left this week · {weekly.daysRemainingInWeek} day{weekly.daysRemainingInWeek !== 1 ? 's' : ''} to go
           </p>
 
           {weekly.remainingThisWeek <= 0 && (
-            <div className="mt-3 inline-block px-3 py-1 rounded-full bg-[#F43F5E]/15 text-[#F43F5E] text-[11px]">
+            <div className="mt-3 inline-block px-3 py-1 rounded-full bg-rose-500/15 text-rose-400 text-[11px]">
               Weekly budget exhausted. Rely on prepaid mess!
             </div>
           )}
@@ -146,29 +146,29 @@ export const Home: React.FC = () => {
           variant="surface"
           className={`flex flex-col justify-between transition-colors ${
             outsideFoodStatus.isOverSoftCap
-              ? 'border-[#F43F5E]/40 bg-[#F43F5E]/5'
+              ? 'border-rose-500/40 bg-rose-500/5'
               : ''
           }`}
         >
           <div>
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2">
-                <div className={`p-2 rounded-2xl ${outsideFoodStatus.isOverSoftCap ? 'bg-[#F43F5E]/20 text-[#F43F5E]' : 'bg-[#D4AF37]/15 text-[#D4AF37]'}`}>
+                <div className={`p-2 rounded-2xl ${outsideFoodStatus.isOverSoftCap ? 'bg-rose-500/20 text-rose-400' : 'bg-blue-600/15 text-blue-400'}`}>
                   <Utensils strokeWidth={1.5} className="w-4 h-4" />
                 </div>
                 <div>
                   <h4 className="font-serif-display text-base font-light">Outside Food</h4>
-                  <span className="text-[11px] text-[#94A3B8]">
+                  <span className="text-[11px] text-slate-400">
                     Mess is paid. Optional spend.
                   </span>
                 </div>
               </div>
 
               <div className="text-right">
-                <span className={`font-serif-display text-lg tnum ${outsideFoodStatus.isOverSoftCap ? 'text-[#F43F5E]' : 'text-[#D4AF37]'}`}>
+                <span className={`font-serif-display text-lg tnum ${outsideFoodStatus.isOverSoftCap ? 'text-rose-400' : 'text-blue-400'}`}>
                   {formatINR(outsideFoodStatus.spent)}
                 </span>
-                <span className="text-[11px] text-[#94A3B8] block">
+                <span className="text-[11px] text-slate-400 block">
                   / {formatINR(outsideFoodStatus.limit)}
                 </span>
               </div>
@@ -178,17 +178,17 @@ export const Home: React.FC = () => {
               value={outsideFoodStatus.spent}
               max={Math.max(1, outsideFoodStatus.limit)}
               height={5}
-              color={outsideFoodStatus.isOverSoftCap ? 'terracotta' : 'gold'}
+              color={outsideFoodStatus.isOverSoftCap ? 'terracotta' : 'blue'}
               className="mt-1"
             />
           </div>
 
           <div className="flex items-center justify-between mt-3 text-[11px]">
-            <span className={outsideFoodStatus.isOverSoftCap ? 'text-[#F43F5E]' : isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}>
+            <span className={outsideFoodStatus.isOverSoftCap ? 'text-rose-400' : isDark ? 'text-slate-400' : 'text-slate-600'}>
               {outsideFoodStatus.percentage}% used
               {outsideFoodStatus.isOverSoftCap ? ' (soft cap alert)' : ''}
             </span>
-            <span className={isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}>
+            <span className={isDark ? 'text-slate-400' : 'text-slate-600'}>
               {formatINR(outsideFoodStatus.remaining)} remaining
             </span>
           </div>
@@ -200,12 +200,12 @@ export const Home: React.FC = () => {
         {/* Goals Section */}
         <div className="flex flex-col gap-2.5">
           <div className="flex items-center justify-between">
-            <span className="meta-label text-[#94A3B8]">Savings Goals</span>
+            <span className="meta-label text-slate-400">Savings Goals</span>
             <button
               type="button"
               onClick={() => setActiveTab('goals')}
               className={`text-xs ${
-                isDark ? 'text-[#94A3B8] hover:text-[#F8FAFC]' : 'text-[#64748B] hover:text-[#0F172A]'
+                isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'
               } flex items-center gap-0.5`}
             >
               <span>View All</span>
@@ -217,11 +217,11 @@ export const Home: React.FC = () => {
             <div
               onClick={() => setActiveTab('goals')}
               className={`p-6 rounded-3xl border border-dashed cursor-pointer text-center text-xs transition-colors ${
-                isDark ? 'border-white/10 hover:border-[#D4AF37]/40 text-[#94A3B8]' : 'border-black/10 hover:border-[#D4AF37]/40 text-[#64748B]'
+                isDark ? 'border-white/10 hover:border-blue-500/40 text-slate-400' : 'border-slate-200 hover:border-blue-500/40 text-slate-600'
               }`}
             >
               <span>No savings goals yet.</span>
-              <span className="text-[#D4AF37] font-medium block mt-1">+ Create your first goal</span>
+              <span className="text-blue-400 font-medium block mt-1">+ Create your first goal</span>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -233,13 +233,13 @@ export const Home: React.FC = () => {
                     onClick={() => setActiveTab('goals')}
                     className={`p-4 rounded-3xl border cursor-pointer transition-all active:scale-[0.98] ${
                       isDark
-                        ? 'bg-[#10121A] border-[rgba(255,255,255,0.08)] hover:border-[#D4AF37]/40'
-                        : 'bg-[#FFFFFF] border-[rgba(15,23,42,0.08)] hover:border-[#D4AF37]/40'
+                        ? 'bg-[#0B0F19] border-white/10 hover:border-blue-500/40'
+                        : 'bg-white border-slate-200 hover:border-blue-500/40'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: goal.coverColor || '#D4AF37' }} />
-                      <span className="text-[10px] text-[#94A3B8]">
+                      <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: goal.coverColor || '#3B82F6' }} />
+                      <span className="text-[10px] text-slate-400">
                         {metrics.isComplete ? 'Completed' : `${metrics.weeksRemaining} wks left`}
                       </span>
                     </div>
@@ -249,10 +249,10 @@ export const Home: React.FC = () => {
                     </h5>
 
                     <div className="flex items-baseline gap-1 mb-2">
-                      <span className="font-serif-display text-lg tnum text-[#D4AF37]">
+                      <span className="font-serif-display text-lg tnum text-blue-400">
                         {formatINR(goal.saved)}
                       </span>
-                      <span className="text-[11px] text-[#94A3B8]">
+                      <span className="text-[11px] text-slate-400">
                         / {formatINR(goal.target)}
                       </span>
                     </div>
@@ -261,7 +261,7 @@ export const Home: React.FC = () => {
                       value={goal.saved}
                       max={goal.target}
                       height={4}
-                      color={metrics.isComplete ? 'sage' : 'gold'}
+                      color={metrics.isComplete ? 'sage' : 'blue'}
                     />
                   </div>
                 );
@@ -273,13 +273,13 @@ export const Home: React.FC = () => {
         {/* Recent Activity Section */}
         <div className="flex flex-col gap-2.5">
           <div className="flex items-center justify-between">
-            <span className="meta-label text-[#94A3B8]">Recent Activity</span>
+            <span className="meta-label text-slate-400">Recent Activity</span>
             {recentTransactions.length > 0 && (
               <button
                 type="button"
                 onClick={() => setActiveTab('ledger')}
                 className={`text-xs ${
-                  isDark ? 'text-[#94A3B8] hover:text-[#F8FAFC]' : 'text-[#64748B] hover:text-[#0F172A]'
+                  isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'
                 } flex items-center gap-0.5`}
               >
                 <span>See all</span>
@@ -292,11 +292,11 @@ export const Home: React.FC = () => {
             <div
               onClick={() => setQuickAddOpen(true)}
               className={`p-6 rounded-3xl border border-dashed cursor-pointer text-center text-xs transition-colors flex flex-col items-center gap-1.5 ${
-                isDark ? 'border-white/10 hover:border-[#D4AF37]/40 text-[#94A3B8]' : 'border-black/10 hover:border-[#D4AF37]/40 text-[#64748B]'
+                isDark ? 'border-white/10 hover:border-blue-500/40 text-slate-400' : 'border-slate-200 hover:border-blue-500/40 text-slate-600'
               }`}
             >
               <span>No transactions logged yet.</span>
-              <span className="text-[#D4AF37] font-medium">+ Log your first rupee</span>
+              <span className="text-blue-400 font-medium">+ Log your first rupee</span>
             </div>
           ) : (
             <Card className="p-0 overflow-hidden divide-y divide-inherit">

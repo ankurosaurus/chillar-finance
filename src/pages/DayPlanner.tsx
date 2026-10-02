@@ -148,13 +148,13 @@ export const DayPlanner: React.FC = () => {
       <div className="pt-1 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <CalendarCheck strokeWidth={1.5} className="w-5 h-5 text-[#D4AF37]" />
-            <span className="meta-label text-[#D4AF37]">Financial Day Planner</span>
+            <CalendarCheck strokeWidth={1.5} className="w-5 h-5 text-blue-400" />
+            <span className="meta-label text-blue-400">Financial Day Planner</span>
           </div>
           <h2 className="font-serif-display text-2xl sm:text-3xl font-light tracking-wide mt-0.5">
             {format(today, 'EEEE, d MMMM yyyy')}
           </h2>
-          <span className="text-xs text-[#94A3B8]">
+          <span className="text-xs text-slate-400">
             Plan expenses a day prior to keep hostel spending effortless and controlled
           </span>
         </div>
@@ -162,7 +162,7 @@ export const DayPlanner: React.FC = () => {
         {/* Quick Date Tabs: Today vs Tomorrow (Plan Prior) */}
         <div
           className={`p-1.5 rounded-2xl border flex items-center gap-1.5 self-start md:self-auto text-xs ${
-            isDark ? 'bg-[#10121A] border-white/10' : 'bg-[#FFFFFF] border-black/10'
+            isDark ? 'bg-[#0B0F19] border-white/10' : 'bg-[#FFFFFF] border-slate-200'
           }`}
         >
           <button
@@ -170,8 +170,8 @@ export const DayPlanner: React.FC = () => {
             onClick={() => setSelectedDateStr(todayStr)}
             className={`px-3.5 py-1.5 rounded-xl font-medium transition-all ${
               selectedDateStr === todayStr
-                ? 'bg-[#D4AF37] text-[#08090C] font-semibold shadow-xs'
-                : 'text-[#94A3B8] hover:text-inherit'
+                ? 'bg-blue-600 text-white font-semibold shadow-xs'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             Today ({format(today, 'EEE, d')})
@@ -182,14 +182,14 @@ export const DayPlanner: React.FC = () => {
             onClick={() => setSelectedDateStr(tomorrowStr)}
             className={`px-3.5 py-1.5 rounded-xl font-medium transition-all flex items-center gap-1.5 ${
               selectedDateStr === tomorrowStr
-                ? 'bg-[#D4AF37] text-[#08090C] font-semibold shadow-xs'
-                : 'text-[#94A3B8] hover:text-inherit'
+                ? 'bg-blue-600 text-white font-semibold shadow-xs'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             <span>Tomorrow (Plan Prior)</span>
             <span
               className={`w-1.5 h-1.5 rounded-full ${
-                selectedDateStr === tomorrowStr ? 'bg-[#08090C]' : 'bg-[#D4AF37]'
+                selectedDateStr === tomorrowStr ? 'bg-white' : 'bg-blue-400'
               }`}
             />
           </button>
@@ -199,7 +199,7 @@ export const DayPlanner: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedDateStr(format(subDays(selectedDate, 1), 'yyyy-MM-dd'))}
-              className="p-1.5 rounded-lg hover:bg-white/5 text-[#94A3B8]"
+              className="p-1.5 rounded-lg hover:bg-white/5 text-slate-400"
               title="Previous Day"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
@@ -207,7 +207,7 @@ export const DayPlanner: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedDateStr(format(addDays(selectedDate, 1), 'yyyy-MM-dd'))}
-              className="p-1.5 rounded-lg hover:bg-white/5 text-[#94A3B8]"
+              className="p-1.5 rounded-lg hover:bg-white/5 text-slate-400"
               title="Next Day"
             >
               <ChevronRight className="w-3.5 h-3.5" />
@@ -220,10 +220,10 @@ export const DayPlanner: React.FC = () => {
       <div
         className={`px-4 py-3 rounded-2xl border flex items-center justify-between text-xs ${
           isCurrentDayTomorrow
-            ? 'border-[#D4AF37]/35 bg-[#D4AF37]/10 text-[#D4AF37]'
+            ? 'border-blue-500/35 bg-blue-600/10 text-blue-400'
             : isCurrentDayToday
-            ? 'border-[#10B981]/35 bg-[#10B981]/10 text-[#10B981]'
-            : 'border-inherit bg-inherit text-[#94A3B8]'
+            ? 'border-emerald-500/35 bg-emerald-500/10 text-emerald-400'
+            : 'border-inherit bg-inherit text-slate-400'
         }`}
       >
         <div className="flex items-center gap-2">
@@ -252,12 +252,12 @@ export const DayPlanner: React.FC = () => {
         {/* Card 1: Safe Daily Limit */}
         <Card variant="surface" className="flex flex-col justify-between">
           <div>
-            <span className="meta-label text-[#94A3B8] block mb-1">Safe Daily Benchmark</span>
-            <span className="font-serif-display text-3xl tnum text-[#D4AF37]">
+            <span className="meta-label text-slate-400 block mb-1">Safe Daily Benchmark</span>
+            <span className="font-serif-display text-3xl tnum text-blue-400">
               {formatINR(recommendedSafeDaily)}
             </span>
           </div>
-          <span className="text-[11px] text-[#94A3B8] mt-2 block">
+          <span className="text-[11px] text-slate-400 mt-2 block">
             Derived from ₹{weekly.remainingThisWeek.toLocaleString('en-IN')} remaining this week
           </span>
         </Card>
@@ -317,7 +317,7 @@ export const DayPlanner: React.FC = () => {
         <div className="lg:col-span-2 flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <div>
-              <span className="meta-label text-[#94A3B8]">Day Expense Blueprint</span>
+              <span className="meta-label text-slate-400">Day Expense Blueprint</span>
               <h3 className="font-serif-display text-lg font-light">
                 Planned Spends for {isCurrentDayToday ? 'Today' : isCurrentDayTomorrow ? 'Tomorrow' : format(selectedDate, 'd MMM')}
               </h3>
@@ -326,7 +326,7 @@ export const DayPlanner: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsAddingItem(true)}
-              className="px-3.5 py-1.5 rounded-full bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors"
+              className="px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 active:scale-95 text-white text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-blue-600/25 transition-all"
             >
               <Plus strokeWidth={2} className="w-3.5 h-3.5" />
               <span>Add Planned Spend</span>
@@ -335,17 +335,17 @@ export const DayPlanner: React.FC = () => {
 
           {currentPlan.items.length === 0 ? (
             <Card className="text-center py-12 flex flex-col items-center gap-3 border-dashed">
-              <Calendar className="w-6 h-6 text-[#D4AF37]" />
+              <Calendar className="w-6 h-6 text-blue-400" />
               <div>
                 <h4 className="font-serif-display text-base font-light">No expenses planned yet</h4>
-                <p className="text-xs text-[#94A3B8] max-w-xs mt-1">
+                <p className="text-xs text-slate-400 max-w-xs mt-1">
                   Plan tomorrow's chai, canteen snacks, or travel a day prior so your wallet is never surprised.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setIsAddingItem(true)}
-                className="px-4 py-2 rounded-full border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37]/10 text-xs font-medium transition-colors"
+                className="px-4 py-2 rounded-full border border-blue-500/40 text-blue-400 hover:bg-blue-500/10 text-xs font-medium transition-colors"
               >
                 + Plan an Expense
               </button>
@@ -362,10 +362,10 @@ export const DayPlanner: React.FC = () => {
                     key={item.id}
                     className={`p-4 transition-colors flex items-center justify-between gap-3 ${
                       isSpent
-                        ? 'border-[#10B981]/30 bg-[#10B981]/5'
+                        ? 'border-emerald-500/30 bg-emerald-500/5'
                         : isSkipped
                         ? 'border-white/5 opacity-60 bg-inherit'
-                        : 'hover:border-[#D4AF37]/40'
+                        : 'hover:border-blue-500/40'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -379,10 +379,10 @@ export const DayPlanner: React.FC = () => {
                         }}
                         className={`w-6 h-6 rounded-full border flex items-center justify-center transition-colors ${
                           isSpent
-                            ? 'bg-[#10B981] border-[#10B981] text-[#08090C]'
+                            ? 'bg-emerald-500 border-emerald-500 text-slate-900'
                             : isSkipped
-                            ? 'border-[#94A3B8] bg-transparent text-[#94A3B8]'
-                            : 'border-white/20 hover:border-[#D4AF37]'
+                            ? 'border-slate-500 bg-transparent text-slate-500'
+                            : 'border-white/20 hover:border-blue-400'
                         }`}
                         title={isSpent ? 'Spent (logged to ledger)' : 'Mark as Spent'}
                       >
@@ -394,31 +394,31 @@ export const DayPlanner: React.FC = () => {
                         <div className="flex items-center gap-2">
                           <h4
                             className={`text-sm font-medium tracking-tight ${
-                              isSkipped ? 'line-through text-[#94A3B8]' : ''
+                              isSkipped ? 'line-through text-slate-500' : ''
                             }`}
                           >
                             {item.title}
                           </h4>
                           {item.isPrepaidMess && (
-                            <span className="text-[10px] px-2 py-0.2 rounded-full bg-[#10B981]/15 text-[#10B981]">
+                            <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-500/15 text-emerald-400">
                               Prepaid Mess
                             </span>
                           )}
                           {item.timeSlot && (
-                            <span className="text-[10px] text-[#94A3B8]">
+                            <span className="text-[10px] text-slate-400">
                               · {item.timeSlot}
                             </span>
                           )}
                         </div>
 
-                        <div className="flex items-center gap-2 text-[11px] text-[#94A3B8] mt-0.5">
+                        <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
                           <span
                             className="w-1.5 h-1.5 rounded-full"
-                            style={{ backgroundColor: cat?.color || '#D4AF37' }}
+                            style={{ backgroundColor: cat?.color || '#3B82F6' }}
                           />
                           <span>{cat?.name || 'General'}</span>
-                          {isSpent && <span className="text-[#10B981]">· Logged to Ledger</span>}
-                          {isSkipped && <span className="text-[#D4AF37]">· Skipped (Rupee Saved)</span>}
+                          {isSpent && <span className="text-emerald-400">· Logged to Ledger</span>}
+                          {isSkipped && <span className="text-blue-400">· Skipped (Rupee Saved)</span>}
                         </div>
                       </div>
                     </div>
@@ -429,10 +429,10 @@ export const DayPlanner: React.FC = () => {
                         <span
                           className={`font-serif-display text-base tnum font-light ${
                             item.isPrepaidMess
-                              ? 'text-[#10B981]'
+                              ? 'text-emerald-400'
                               : isSkipped
-                              ? 'text-[#94A3B8]'
-                              : 'text-[#D4AF37]'
+                              ? 'text-slate-500'
+                              : 'text-blue-400'
                           }`}
                         >
                           {item.isPrepaidMess ? '₹0' : formatINR(item.plannedAmount)}
@@ -446,7 +446,7 @@ export const DayPlanner: React.FC = () => {
                             <button
                               type="button"
                               onClick={() => markPlannedItemSpent(selectedDateStr, item.id)}
-                              className="p-1.5 rounded-xl border border-[#10B981]/40 text-[#10B981] hover:bg-[#10B981]/10 text-xs transition-colors"
+                              className="p-1.5 rounded-xl border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 text-xs transition-colors"
                               title="Mark as Spent"
                             >
                               <CheckCircle2 className="w-4 h-4" />
@@ -454,7 +454,7 @@ export const DayPlanner: React.FC = () => {
                             <button
                               type="button"
                               onClick={() => markPlannedItemSkipped(selectedDateStr, item.id)}
-                              className="p-1.5 rounded-xl border border-white/10 hover:border-[#D4AF37]/40 text-[#94A3B8] hover:text-[#D4AF37] text-xs transition-colors"
+                              className="p-1.5 rounded-xl border border-white/10 hover:border-blue-500/40 text-slate-400 hover:text-blue-400 text-xs transition-colors"
                               title="Skip & Save this expense"
                             >
                               <Shield className="w-4 h-4" />
@@ -465,7 +465,7 @@ export const DayPlanner: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => deletePlannedItem(selectedDateStr, item.id)}
-                          className="p-1.5 text-[#F43F5E] opacity-60 hover:opacity-100 rounded-lg transition-opacity"
+                          className="p-1.5 text-rose-400 opacity-60 hover:opacity-100 rounded-lg transition-opacity"
                           title="Delete item"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -484,10 +484,10 @@ export const DayPlanner: React.FC = () => {
           {/* Quick Hostel Spends Presets */}
           <Card variant="surface" className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="meta-label text-[#94A3B8]">Quick Hostel Presets</span>
-              <span className="text-[11px] text-[#D4AF37]">1-Tap Add</span>
+              <span className="meta-label text-slate-400">Quick Hostel Presets</span>
+              <span className="text-[11px] text-blue-400">1-Tap Add</span>
             </div>
-            <p className="text-xs text-[#94A3B8]">
+            <p className="text-xs text-slate-400">
               Common daily hostel expenses ready to schedule for tomorrow:
             </p>
 
@@ -499,12 +499,12 @@ export const DayPlanner: React.FC = () => {
                   onClick={() => handleAddPreset(preset)}
                   className={`p-2.5 rounded-2xl border text-xs text-left flex items-center justify-between transition-colors ${
                     isDark
-                      ? 'border-white/5 bg-[#181B26] hover:border-[#D4AF37]/40 hover:bg-[#D4AF37]/5'
-                      : 'border-black/5 bg-[#F1F5F9] hover:border-[#D4AF37]/40 hover:bg-[#D4AF37]/5'
+                      ? 'border-white/5 bg-[#0B0F19] hover:border-blue-500/40 hover:bg-blue-600/5'
+                      : 'border-slate-200 bg-slate-50 hover:border-blue-500/40 hover:bg-blue-50'
                   }`}
                 >
                   <span className="truncate pr-2">{preset.title}</span>
-                  <span className="font-serif-display tnum font-medium text-[#D4AF37] shrink-0">
+                  <span className="font-serif-display tnum font-medium text-blue-400 shrink-0">
                     {preset.amount === 0 ? '₹0' : formatINR(preset.amount)}
                   </span>
                 </button>
@@ -515,11 +515,11 @@ export const DayPlanner: React.FC = () => {
           {/* Day Strategy / Food Notes Card */}
           <Card variant="surface" className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="meta-label text-[#94A3B8]">Strategy & Notes</span>
+              <span className="meta-label text-slate-400">Strategy & Notes</span>
               <button
                 type="button"
                 onClick={openNotesEditor}
-                className="text-xs text-[#D4AF37] flex items-center gap-1"
+                className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1"
               >
                 <Edit2 className="w-3 h-3" />
                 <span>Edit</span>
@@ -533,7 +533,7 @@ export const DayPlanner: React.FC = () => {
             ) : (
               <p
                 onClick={openNotesEditor}
-                className="text-xs text-[#94A3B8] cursor-pointer hover:text-inherit py-2"
+                className="text-xs text-slate-400 cursor-pointer hover:text-white py-2"
               >
                 + Add a note for this day (e.g. "Mess has special thali tomorrow—resist food delivery app temptation").
               </p>
@@ -551,20 +551,20 @@ export const DayPlanner: React.FC = () => {
       >
         <div className="flex flex-col gap-4 pb-4">
           <div>
-            <span className="meta-label text-[#94A3B8] mb-1 block">Expense Title</span>
+            <span className="meta-label text-slate-400 mb-1 block">Expense Title</span>
             <input
               type="text"
               placeholder="e.g. Evening tapri chai, Xerox, Canteen roll"
               value={itemTitle}
               onChange={(e) => setItemTitle(e.target.value)}
               className={`w-full px-3.5 py-2.5 rounded-2xl border text-sm outline-none ${
-                isDark ? 'bg-[#181B26] border-white/10 text-white' : 'bg-[#F1F5F9] border-black/10 text-black'
+                isDark ? 'bg-[#0B0F19] border-white/10 text-white' : 'bg-slate-100 border-slate-200 text-slate-900'
               }`}
             />
           </div>
 
           <div>
-            <span className="meta-label text-[#94A3B8] mb-1 block">Planned Amount (₹)</span>
+            <span className="meta-label text-slate-400 mb-1 block">Planned Amount (₹)</span>
             <input
               type="number"
               placeholder="Amount in ₹"
@@ -574,7 +574,7 @@ export const DayPlanner: React.FC = () => {
               className={`w-full px-4 py-3 rounded-2xl border font-serif-display text-2xl tnum outline-none ${
                 isPrepaidMess ? 'opacity-50' : ''
               } ${
-                isDark ? 'bg-[#181B26] border-white/10 text-[#D4AF37]' : 'bg-[#F1F5F9] border-black/10 text-[#D4AF37]'
+                isDark ? 'bg-[#0B0F19] border-white/10 text-blue-400' : 'bg-slate-100 border-slate-200 text-blue-600'
               }`}
             />
           </div>
@@ -583,20 +583,20 @@ export const DayPlanner: React.FC = () => {
           <div
             onClick={() => setIsPrepaidMess(!isPrepaidMess)}
             className={`flex items-center justify-between p-3 rounded-2xl border cursor-pointer transition-colors ${
-              isPrepaidMess ? 'border-[#10B981]/40 bg-[#10B981]/10' : 'border-inherit'
+              isPrepaidMess ? 'border-emerald-500/40 bg-emerald-500/10' : 'border-inherit'
             }`}
           >
             <div className="flex items-center gap-2">
-              <Utensils className="w-4 h-4 text-[#10B981]" />
+              <Utensils className="w-4 h-4 text-emerald-400" />
               <div>
                 <h5 className="text-xs font-medium">Prepaid Hostel Mess Meal</h5>
-                <span className="text-[11px] text-[#94A3B8]">Costs ₹0 (Already prepaid)</span>
+                <span className="text-[11px] text-slate-400">Costs ₹0 (Already prepaid)</span>
               </div>
             </div>
 
             <div
               className={`w-5 h-5 rounded-full border flex items-center justify-center ${
-                isPrepaidMess ? 'bg-[#10B981] border-[#10B981] text-[#08090C]' : 'border-white/20'
+                isPrepaidMess ? 'bg-emerald-500 border-emerald-500 text-slate-900' : 'border-white/20'
               }`}
             >
               {isPrepaidMess && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -605,7 +605,7 @@ export const DayPlanner: React.FC = () => {
 
           {/* Time Slot Picker */}
           <div>
-            <span className="meta-label text-[#94A3B8] mb-1 block">Time Slot</span>
+            <span className="meta-label text-slate-400 mb-1 block">Time Slot</span>
             <div className="grid grid-cols-4 gap-1.5">
               {(['Morning', 'Afternoon', 'Evening', 'Night'] as PlannedItem['timeSlot'][]).map((slot) => (
                 <button
@@ -614,8 +614,8 @@ export const DayPlanner: React.FC = () => {
                   onClick={() => setItemTimeSlot(slot)}
                   className={`py-2 text-xs rounded-xl border font-medium transition-all ${
                     itemTimeSlot === slot
-                      ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#D4AF37]'
-                      : 'border-inherit text-[#94A3B8]'
+                      ? 'border-blue-500 bg-blue-600/15 text-blue-400'
+                      : 'border-inherit text-slate-400'
                   }`}
                 >
                   {slot}
@@ -626,12 +626,12 @@ export const DayPlanner: React.FC = () => {
 
           {/* Category Picker */}
           <div>
-            <span className="meta-label text-[#94A3B8] mb-1 block">Category</span>
+            <span className="meta-label text-slate-400 mb-1 block">Category</span>
             <select
               value={itemCategory}
               onChange={(e) => setItemCategory(e.target.value)}
               className={`w-full px-3.5 py-2.5 rounded-2xl border text-xs outline-none ${
-                isDark ? 'bg-[#181B26] border-white/10 text-white' : 'bg-[#F1F5F9] border-black/10 text-black'
+                isDark ? 'bg-[#0B0F19] border-white/10 text-white' : 'bg-slate-100 border-slate-200 text-slate-900'
               }`}
             >
               {categories.map((c) => (
@@ -646,7 +646,7 @@ export const DayPlanner: React.FC = () => {
             type="button"
             onClick={handleSaveItem}
             disabled={!itemTitle.trim()}
-            className="w-full py-3.5 rounded-2xl bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] font-serif-display text-base font-semibold tracking-wide transition-colors disabled:opacity-50"
+            className="w-full py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-serif-display text-base font-semibold tracking-wide shadow-md shadow-blue-600/30 transition-all disabled:opacity-50"
           >
             Add to Day Plan
           </button>
@@ -667,13 +667,13 @@ export const DayPlanner: React.FC = () => {
             onChange={(e) => setDayNotes(e.target.value)}
             placeholder="e.g. Eat mess dinner tonight, keep evening spending under ₹50 for tea."
             className={`w-full p-3.5 rounded-2xl border text-xs leading-relaxed outline-none ${
-              isDark ? 'bg-[#181B26] border-white/10 text-white' : 'bg-[#F1F5F9] border-black/10 text-black'
+              isDark ? 'bg-[#0B0F19] border-white/10 text-white' : 'bg-slate-100 border-slate-200 text-slate-900'
             }`}
           />
           <button
             type="button"
             onClick={handleSaveNotes}
-            className="w-full py-3 rounded-2xl bg-[#D4AF37] text-[#08090C] font-serif-display text-base font-semibold transition-colors"
+            className="w-full py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-serif-display text-base font-semibold shadow-md shadow-blue-600/30 transition-all"
           >
             Save Strategy Note
           </button>

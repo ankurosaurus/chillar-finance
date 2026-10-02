@@ -81,8 +81,16 @@ export interface DayPlan {
   items: PlannedItem[];
 }
 
+export interface UserAccount {
+  id?: string;
+  username: string;
+  passwordHash: string;
+  fullName?: string;
+  createdAt: string;
+}
+
 export type ThemeMode = 'dark' | 'light';
-export type AccentColor = 'gold' | 'emerald' | 'sapphire' | 'copper';
+export type AccentColor = 'blue' | 'white' | 'black';
 
 export interface Profile {
   monthlyIncome: number;
