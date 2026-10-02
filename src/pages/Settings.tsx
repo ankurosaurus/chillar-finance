@@ -152,13 +152,13 @@ export const Settings: React.FC = () => {
       {/* Title */}
       <div className="pt-1">
         <h2 className="font-serif-display text-2xl font-light">Preferences & Setup</h2>
-        <span className="text-xs text-[#8A8A8F]">
+        <span className="text-xs text-[#94A3B8]">
           Income, fixed costs, security & backups
         </span>
       </div>
 
       {notification && (
-        <div className="p-3 rounded-2xl bg-[#C9A96E]/15 border border-[#C9A96E]/30 text-xs text-[#C9A96E] text-center font-medium">
+        <div className="p-3 rounded-2xl bg-[#D4AF37]/15 border border-[#D4AF37]/30 text-xs text-[#D4AF37] text-center font-medium">
           {notification}
         </div>
       )}
@@ -473,14 +473,14 @@ export const Settings: React.FC = () => {
             onChange={(e) => setPinInput(e.target.value.replace(/\D/g, ''))}
             placeholder="••••"
             className={`w-36 text-center tracking-[1em] px-4 py-3 rounded-2xl border font-serif-display text-2xl outline-none ${
-              isDark ? 'bg-[#1A1A1D] border-white/10' : 'bg-[#EFECE6] border-black/10'
+              isDark ? 'bg-[#181B26] border-white/10' : 'bg-[#F1F5F9] border-black/10'
             }`}
           />
           <button
             type="button"
             onClick={handleSavePin}
             disabled={pinInput.length !== 4}
-            className="w-full py-3 rounded-2xl bg-[#C9A96E] text-[#0B0B0C] font-serif-display text-base font-medium disabled:opacity-50"
+            className="w-full py-3 rounded-2xl bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] font-serif-display text-base font-semibold transition-colors disabled:opacity-50"
           >
             Set PIN
           </button>

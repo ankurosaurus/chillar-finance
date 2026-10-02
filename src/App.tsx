@@ -35,7 +35,7 @@ export const App: React.FC = () => {
   return (
     <div
       className={`min-h-screen w-full flex flex-col items-center transition-colors duration-200 ${
-        isDark ? 'bg-[#0B0B0C] text-[#F4F2EE]' : 'bg-[#F7F5F1] text-[#111111]'
+        isDark ? 'bg-[#08090C] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'
       }`}
     >
       {/* Desktop & Mobile Responsive Canvas */}

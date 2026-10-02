@@ -37,10 +37,10 @@ export const Sheet: React.FC<SheetProps> = ({
     };
   }, [isOpen, onClose]);
 
-  const sheetBg = isDark ? 'bg-[#131315]' : 'bg-[#FFFFFF]';
+  const sheetBg = isDark ? 'bg-[#10121A]' : 'bg-[#FFFFFF]';
   const borderClass = isDark
     ? 'border-t border-[rgba(255,255,255,0.08)]'
-    : 'border-t border-[rgba(0,0,0,0.08)]';
+    : 'border-t border-[rgba(15,23,42,0.08)]';
   const handleBg = isDark ? 'bg-white/20' : 'bg-black/15';
 
   return (
@@ -80,7 +80,7 @@ export const Sheet: React.FC<SheetProps> = ({
                     </h3>
                   )}
                   {subtitle && (
-                    <p className={`text-xs ${isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'}`}>
+                    <p className={`text-xs ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
                       {subtitle}
                     </p>
                   )}
@@ -88,7 +88,7 @@ export const Sheet: React.FC<SheetProps> = ({
                 <button
                   onClick={onClose}
                   className={`p-1.5 rounded-full transition-colors ${
-                    isDark ? 'hover:bg-white/10 text-[#8A8A8F]' : 'hover:bg-black/5 text-[#75736E]'
+                    isDark ? 'hover:bg-white/10 text-[#94A3B8]' : 'hover:bg-black/5 text-[#64748B]'
                   }`}
                   aria-label="Close"
                 >

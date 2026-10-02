@@ -33,17 +33,17 @@ export const LockScreen: React.FC = () => {
   };
 
   const keyBg = isDark
-    ? 'bg-[#1A1A1D] hover:bg-[#222226] active:bg-[#2A2A2F] text-[#F4F2EE]'
-    : 'bg-[#EFECE6] hover:bg-[#E5E1D8] active:bg-[#DCD8CE] text-[#111111]';
+    ? 'bg-[#181B26] hover:bg-[#202433] active:bg-[#282D40] text-[#F8FAFC]'
+    : 'bg-[#F1F5F9] hover:bg-[#E2E8F0] active:bg-[#CBD5E1] text-[#0F172A]';
 
   const borderClass = isDark
-    ? 'border-[rgba(255,255,255,0.06)]'
-    : 'border-[rgba(0,0,0,0.06)]';
+    ? 'border-[rgba(255,255,255,0.08)]'
+    : 'border-[rgba(15,23,42,0.08)]';
 
   return (
     <div
       className={`fixed inset-0 z-50 flex flex-col items-center justify-between py-12 px-6 ${
-        isDark ? 'bg-[#0B0B0C] text-[#F4F2EE]' : 'bg-[#F7F5F1] text-[#111111]'
+        isDark ? 'bg-[#08090C] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'
       }`}
     >
       {/* Brand & Tagline */}
@@ -52,17 +52,17 @@ export const LockScreen: React.FC = () => {
           <span className="font-serif-display text-4xl tracking-[0.05em] font-light">
             Chillar
           </span>
-          <span className="w-2 h-2 rounded-full bg-[#C9A96E]" />
+          <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
         </div>
-        <p className={`text-xs ${isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'}`}>
+        <p className={`text-xs ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
           Every rupee, accounted for.
         </p>
       </div>
 
       {/* PIN Dots with shake on error */}
       <div className="flex flex-col items-center my-auto">
-        <div className="flex items-center gap-2 mb-6 text-xs meta-label text-[#8A8A8F]">
-          <Lock strokeWidth={1.5} className="w-3.5 h-3.5 text-[#C9A96E]" />
+        <div className="flex items-center gap-2 mb-6 text-xs meta-label text-[#94A3B8]">
+          <Lock strokeWidth={1.5} className="w-3.5 h-3.5 text-[#D4AF37]" />
           <span>Enter 4-Digit Passcode</span>
         </div>
 
@@ -78,9 +78,9 @@ export const LockScreen: React.FC = () => {
                 key={idx}
                 className={`w-3.5 h-3.5 rounded-full transition-all duration-200 border ${
                   isFilled
-                    ? 'bg-[#C9A96E] border-[#C9A96E] scale-110'
+                    ? 'bg-[#D4AF37] border-[#D4AF37] scale-110'
                     : isError
-                    ? 'border-[#C77D6B] bg-[#C77D6B]/20'
+                    ? 'border-[#F43F5E] bg-[#F43F5E]/20'
                     : isDark
                     ? 'border-white/20 bg-white/5'
                     : 'border-black/20 bg-black/5'
@@ -91,7 +91,7 @@ export const LockScreen: React.FC = () => {
         </motion.div>
 
         {isError && (
-          <span className="text-xs text-[#C77D6B] mt-4 font-normal">
+          <span className="text-xs text-[#F43F5E] mt-4 font-normal">
             Incorrect passcode
           </span>
         )}

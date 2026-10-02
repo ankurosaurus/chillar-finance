@@ -24,13 +24,13 @@ export const Chip: React.FC<ChipProps> = ({
 
   const basePadding = size === 'sm' ? 'px-3 py-1.5 text-xs' : 'px-3.5 py-2 text-xs md:text-sm';
 
-  const defaultBorder = isDark ? 'border-[rgba(255,255,255,0.08)]' : 'border-[rgba(0,0,0,0.08)]';
-  const defaultBg = isDark ? 'bg-[#131315]' : 'bg-[#FFFFFF]';
-  const defaultText = isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]';
+  const defaultBorder = isDark ? 'border-[rgba(255,255,255,0.08)]' : 'border-[rgba(15,23,42,0.08)]';
+  const defaultBg = isDark ? 'bg-[#10121A]' : 'bg-[#FFFFFF]';
+  const defaultText = isDark ? 'text-[#94A3B8]' : 'text-[#64748B]';
 
-  const selectedBorder = 'border-[#C9A96E]';
-  const selectedBg = isDark ? 'bg-[#C9A96E]/15' : 'bg-[#C9A96E]/12';
-  const selectedText = isDark ? 'text-[#F4F2EE] font-medium' : 'text-[#111111] font-medium';
+  const selectedBorder = 'border-[#D4AF37]';
+  const selectedBg = isDark ? 'bg-[#D4AF37]/15' : 'bg-[#D4AF37]/12';
+  const selectedText = isDark ? 'text-[#D4AF37] font-medium' : 'text-[#D4AF37] font-semibold';
 
   return (
     <button
@@ -39,7 +39,7 @@ export const Chip: React.FC<ChipProps> = ({
       className={`inline-flex items-center gap-2 rounded-full border transition-all duration-150 active:scale-[0.98] ${basePadding} ${
         selected
           ? `${selectedBorder} ${selectedBg} ${selectedText}`
-          : `${defaultBorder} ${defaultBg} ${defaultText} hover:border-[#C9A96E]/40`
+          : `${defaultBorder} ${defaultBg} ${defaultText} hover:border-[#D4AF37]/40`
       } ${className}`}
     >
       {dotColor && (

@@ -88,8 +88,8 @@ export const QuickAddModal: React.FC = () => {
           <div
             className={`p-1 rounded-full border flex items-center gap-1 ${
               isDark
-                ? 'bg-[#1A1A1D] border-[rgba(255,255,255,0.08)]'
-                : 'bg-[#EFECE6] border-[rgba(0,0,0,0.08)]'
+                ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)]'
+                : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)]'
             }`}
           >
             <button
@@ -97,8 +97,8 @@ export const QuickAddModal: React.FC = () => {
               onClick={() => setTxType('expense')}
               className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
                 txType === 'expense'
-                  ? 'bg-[#0B0B0C] text-[#F4F2EE] shadow-sm'
-                  : 'text-[#8A8A8F]'
+                  ? 'bg-[#08090C] text-[#F8FAFC] shadow-sm'
+                  : 'text-[#94A3B8]'
               }`}
             >
               Expense
@@ -108,8 +108,8 @@ export const QuickAddModal: React.FC = () => {
               onClick={() => setTxType('income')}
               className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
                 txType === 'income'
-                  ? 'bg-[#7FA38A] text-[#0B0B0C] font-semibold shadow-sm'
-                  : 'text-[#8A8A8F]'
+                  ? 'bg-[#10B981] text-[#08090C] font-semibold shadow-sm'
+                  : 'text-[#94A3B8]'
               }`}
             >
               Income
@@ -126,7 +126,7 @@ export const QuickAddModal: React.FC = () => {
             transition={{ duration: 0.1 }}
             className="font-serif-display text-5xl md:text-6xl font-light tnum tracking-tight"
           >
-            <span className={txType === 'income' ? 'text-[#7FA38A]' : 'text-[#C9A96E]'}>
+            <span className={txType === 'income' ? 'text-[#10B981]' : 'text-[#D4AF37]'}>
               {formatINR(amount, { showSymbol: true })}
             </span>
           </motion.div>
@@ -139,7 +139,7 @@ export const QuickAddModal: React.FC = () => {
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="mx-auto text-center px-4 py-1.5 rounded-full bg-[#C9A96E]/15 border border-[#C9A96E]/30 text-xs text-[#C9A96E] flex items-center gap-1.5"
+              className="mx-auto text-center px-4 py-1.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/30 text-xs text-[#D4AF37] flex items-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>{feedbackNudge || 'Logged successfully'}</span>
@@ -150,7 +150,7 @@ export const QuickAddModal: React.FC = () => {
         {/* Category Chips Horizontal Scroll (One tap) */}
         {txType === 'expense' && (
           <div className="flex flex-col gap-1.5">
-            <span className="meta-label text-[#8A8A8F]">Category</span>
+            <span className="meta-label text-[#94A3B8]">Category</span>
             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none -mx-2 px-2">
               {categories.map((cat) => (
                 <Chip
@@ -177,7 +177,7 @@ export const QuickAddModal: React.FC = () => {
             type="button"
             onClick={() => setShowDetails(!showDetails)}
             className={`text-xs ${
-              isDark ? 'text-[#8A8A8F] hover:text-[#F4F2EE]' : 'text-[#75736E] hover:text-[#111111]'
+              isDark ? 'text-[#94A3B8] hover:text-[#F8FAFC]' : 'text-[#64748B] hover:text-[#0F172A]'
             } flex items-center gap-1 py-1`}
           >
             <span>{showDetails ? 'Hide extra details' : '+ Note, mode, or date'}</span>
@@ -197,8 +197,8 @@ export const QuickAddModal: React.FC = () => {
                 onChange={(e) => setNote(e.target.value)}
                 className={`w-full px-3.5 py-2.5 rounded-2xl border text-sm outline-none transition-colors ${
                   isDark
-                    ? 'bg-[#1A1A1D] border-[rgba(255,255,255,0.08)] text-[#F4F2EE] focus:border-[#C9A96E]'
-                    : 'bg-[#EFECE6] border-[rgba(0,0,0,0.08)] text-[#111111] focus:border-[#C9A96E]'
+                    ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#F8FAFC] focus:border-[#D4AF37]'
+                    : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A] focus:border-[#D4AF37]'
                 }`}
               />
 
@@ -213,8 +213,8 @@ export const QuickAddModal: React.FC = () => {
                       onClick={() => setPaymentMode(mode)}
                       className={`flex-1 py-1.5 text-xs rounded-xl font-medium transition-all ${
                         paymentMode === mode
-                          ? 'bg-[#C9A96E] text-[#0B0B0C]'
-                          : 'text-[#8A8A8F]'
+                          ? 'bg-[#D4AF37] text-[#08090C]'
+                          : 'text-[#94A3B8]'
                       }`}
                     >
                       {mode}
@@ -229,8 +229,8 @@ export const QuickAddModal: React.FC = () => {
                   onChange={(e) => setDateStr(e.target.value)}
                   className={`px-3 py-1.5 rounded-2xl border text-xs outline-none ${
                     isDark
-                      ? 'bg-[#1A1A1D] border-[rgba(255,255,255,0.08)] text-[#F4F2EE]'
-                      : 'bg-[#EFECE6] border-[rgba(0,0,0,0.08)] text-[#111111]'
+                      ? 'bg-[#181B26] border-[rgba(255,255,255,0.08)] text-[#F8FAFC]'
+                      : 'bg-[#F1F5F9] border-[rgba(15,23,42,0.08)] text-[#0F172A]'
                   }`}
                 />
               </div>
@@ -245,8 +245,8 @@ export const QuickAddModal: React.FC = () => {
           disabled={amount <= 0 || justSaved}
           className={`w-full py-4 rounded-2xl font-serif-display text-lg tracking-wide flex items-center justify-center gap-2 transition-all duration-150 active:scale-[0.98] ${
             amount > 0
-              ? 'bg-[#C9A96E] text-[#0B0B0C] shadow-md hover:bg-[#D7BC88]'
-              : 'bg-white/10 text-[#8A8A8F] cursor-not-allowed'
+              ? 'bg-[#D4AF37] text-[#08090C] shadow-md hover:bg-[#E5C358]'
+              : 'bg-white/10 text-[#94A3B8] cursor-not-allowed'
           }`}
         >
           {justSaved ? (

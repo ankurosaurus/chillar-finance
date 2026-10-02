@@ -15,14 +15,14 @@ export const AlertBanner: React.FC = () => {
     <div className="w-full flex flex-col gap-2 my-2 px-1">
       <AnimatePresence>
         {alerts.slice(0, 3).map((alert) => {
-          let accentColor = 'border-[#C9A96E]/30 bg-[#C9A96E]/10 text-[#C9A96E]';
+          let accentColor = 'border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37]';
           let IconComponent = Info;
 
           if (alert.type === 'category_100' || alert.type === 'week_exhausted') {
-            accentColor = 'border-[#C77D6B]/30 bg-[#C77D6B]/10 text-[#C77D6B]';
+            accentColor = 'border-[#F43F5E]/30 bg-[#F43F5E]/10 text-[#F43F5E]';
             IconComponent = AlertTriangle;
           } else if (alert.type === 'goal_milestone') {
-            accentColor = 'border-[#7FA38A]/30 bg-[#7FA38A]/10 text-[#7FA38A]';
+            accentColor = 'border-[#10B981]/30 bg-[#10B981]/10 text-[#10B981]';
             IconComponent = Award;
           }
 
@@ -43,7 +43,7 @@ export const AlertBanner: React.FC = () => {
                   </h5>
                   <p
                     className={`text-[11px] leading-relaxed mt-0.5 ${
-                      isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'
+                      isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'
                     }`}
                   >
                     {alert.message}

@@ -3,12 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight,
   ArrowLeft,
-  Sparkles,
-  ShieldCheck,
   Check,
   Plus,
   Trash2,
-  Utensils,
 } from 'lucide-react';
 import { Card } from '../components/Card';
 import { useFinanceStore } from '../store/useFinanceStore';
@@ -20,7 +17,6 @@ export const Onboarding: React.FC = () => {
   const profile = useFinanceStore((state) => state.profile);
   const setProfile = useFinanceStore((state) => state.setProfile);
   const addGoal = useFinanceStore((state) => state.addGoal);
-  const loadDemoData = useFinanceStore((state) => state.loadDemoData);
   const { isDark } = useTheme();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -89,7 +85,7 @@ export const Onboarding: React.FC = () => {
         target: parseFloat(goalTarget),
         targetDate: new Date(Date.now() + 60 * 86400000).toISOString().slice(0, 10),
         roundUpEnabled: true,
-        coverColor: '#C9A96E',
+        coverColor: '#D4AF37',
       });
     }
   };
@@ -97,7 +93,7 @@ export const Onboarding: React.FC = () => {
   return (
     <div
       className={`min-h-screen w-full flex flex-col justify-between p-6 ${
-        isDark ? 'bg-[#0B0B0C] text-[#F4F2EE]' : 'bg-[#F7F5F1] text-[#111111]'
+        isDark ? 'bg-[#08090C] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'
       }`}
     >
       {/* Brand Header */}
@@ -106,9 +102,9 @@ export const Onboarding: React.FC = () => {
           <span className="font-serif-display text-3xl font-light tracking-[0.05em]">
             Chillar
           </span>
-          <span className="w-2 h-2 rounded-full bg-[#C9A96E]" />
+          <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
         </div>
-        <p className={`text-xs ${isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'}`}>
+        <p className={`text-xs ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
           Every rupee, accounted for.
         </p>
 
@@ -119,9 +115,9 @@ export const Onboarding: React.FC = () => {
               key={s}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 s === step
-                  ? 'w-8 bg-[#C9A96E]'
+                  ? 'w-8 bg-[#D4AF37]'
                   : s < step
-                  ? 'w-4 bg-[#7FA38A]'
+                  ? 'w-4 bg-[#10B981]'
                   : isDark
                   ? 'w-4 bg-white/10'
                   : 'w-4 bg-black/10'
@@ -143,18 +139,18 @@ export const Onboarding: React.FC = () => {
               className="flex flex-col gap-5"
             >
               <div>
-                <span className="meta-label text-[#C9A96E] block mb-1">Step 1 of 3</span>
+                <span className="meta-label text-[#D4AF37] block mb-1">Step 1 of 3</span>
                 <h3 className="font-serif-display text-2xl font-light">
                   Your monthly money
                 </h3>
-                <p className={`text-xs ${isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'}`}>
+                <p className={`text-xs ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
                   How much allowance arrives each month, and when?
                 </p>
               </div>
 
               <div className="flex flex-col gap-3">
                 <div>
-                  <label className="text-[11px] meta-label text-[#8A8A8F] mb-1 block">
+                  <label className="text-[11px] meta-label text-[#94A3B8] mb-1 block">
                     Pocket Money / Allowance (₹)
                   </label>
                   <input
@@ -164,14 +160,14 @@ export const Onboarding: React.FC = () => {
                     onChange={(e) => setAllowance(e.target.value)}
                     className={`w-full px-4 py-3 rounded-2xl border font-serif-display text-2xl tnum outline-none ${
                       isDark
-                        ? 'bg-[#131315] border-white/10 text-[#C9A96E]'
-                        : 'bg-white border-black/10 text-[#C9A96E]'
+                        ? 'bg-[#10121A] border-white/10 text-[#D4AF37]'
+                        : 'bg-white border-black/10 text-[#D4AF37]'
                     }`}
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] meta-label text-[#8A8A8F] mb-1 block">
+                  <label className="text-[11px] meta-label text-[#94A3B8] mb-1 block">
                     Side Income / Tutoring (Optional ₹)
                   </label>
                   <input
@@ -179,24 +175,24 @@ export const Onboarding: React.FC = () => {
                     value={extraIncome}
                     onChange={(e) => setExtraIncome(e.target.value)}
                     className={`w-full px-4 py-2.5 rounded-2xl border text-sm font-serif-display tnum outline-none ${
-                      isDark ? 'bg-[#131315] border-white/10' : 'bg-white border-black/10'
+                      isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
                     }`}
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] meta-label text-[#8A8A8F] mb-1 block">
+                  <label className="text-[11px] meta-label text-[#94A3B8] mb-1 block">
                     Day of month it arrives
                   </label>
                   <select
                     value={payDay}
                     onChange={(e) => setPayDay(e.target.value)}
                     className={`w-full px-4 py-2.5 rounded-2xl border text-xs outline-none ${
-                      isDark ? 'bg-[#131315] border-white/10' : 'bg-white border-black/10'
+                      isDark ? 'bg-[#10121A] border-white/10 text-white' : 'bg-white border-black/10'
                     }`}
                   >
                     {[1, 5, 10, 15, 20, 25, 30].map((d) => (
-                      <option key={d} value={d}>
+                      <option key={d} value={d} className={isDark ? 'bg-[#10121A]' : 'bg-white'}>
                         {d}st / {d}th of every month
                       </option>
                     ))}
@@ -215,11 +211,11 @@ export const Onboarding: React.FC = () => {
               className="flex flex-col gap-4"
             >
               <div>
-                <span className="meta-label text-[#C9A96E] block mb-1">Step 2 of 3</span>
+                <span className="meta-label text-[#D4AF37] block mb-1">Step 2 of 3</span>
                 <h3 className="font-serif-display text-2xl font-light">
                   Fixed Costs & Mess
                 </h3>
-                <p className={`text-xs ${isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'}`}>
+                <p className={`text-xs ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
                   Hostel mess is already prepaid and excluded from daily deductions.
                 </p>
               </div>
@@ -231,16 +227,16 @@ export const Onboarding: React.FC = () => {
                     key={fc.id}
                     className={`p-3 rounded-2xl border flex items-center justify-between text-xs ${
                       fc.isPrepaidMess
-                        ? 'border-[#7FA38A]/30 bg-[#7FA38A]/5'
+                        ? 'border-[#10B981]/30 bg-[#10B981]/5'
                         : isDark
-                        ? 'border-white/5 bg-[#131315]'
+                        ? 'border-white/5 bg-[#10121A]'
                         : 'border-black/5 bg-white'
                     }`}
                   >
                     <div>
                       <span className="font-medium block">{fc.name}</span>
                       {fc.isPrepaidMess && (
-                        <span className="text-[10px] text-[#7FA38A]">
+                        <span className="text-[10px] text-[#10B981]">
                           Prepaid Mess (No monthly deduction)
                         </span>
                       )}
@@ -253,7 +249,7 @@ export const Onboarding: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => handleRemoveCost(fc.id)}
-                          className="p-1 text-[#C77D6B] opacity-60 hover:opacity-100"
+                          className="p-1 text-[#F43F5E] opacity-60 hover:opacity-100"
                         >
                           <Trash2 strokeWidth={1.5} className="w-3.5 h-3.5" />
                         </button>
@@ -271,7 +267,7 @@ export const Onboarding: React.FC = () => {
                   value={customCostName}
                   onChange={(e) => setCustomCostName(e.target.value)}
                   className={`px-3 py-2 rounded-xl border text-xs outline-none ${
-                    isDark ? 'bg-[#131315] border-white/10' : 'bg-white border-black/10'
+                    isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
                   }`}
                 />
                 <div className="flex gap-1">
@@ -281,13 +277,13 @@ export const Onboarding: React.FC = () => {
                     value={customCostAmount}
                     onChange={(e) => setCustomCostAmount(e.target.value)}
                     className={`flex-1 px-3 py-2 rounded-xl border text-xs outline-none ${
-                      isDark ? 'bg-[#131315] border-white/10' : 'bg-white border-black/10'
+                      isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
                     }`}
                   />
                   <button
                     type="button"
                     onClick={handleAddCost}
-                    className="px-3 rounded-xl bg-[#C9A96E]/20 text-[#C9A96E] hover:bg-[#C9A96E]/30 text-xs font-medium"
+                    className="px-3 rounded-xl bg-[#D4AF37]/20 text-[#D4AF37] hover:bg-[#D4AF37]/30 text-xs font-medium"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
@@ -305,18 +301,18 @@ export const Onboarding: React.FC = () => {
               className="flex flex-col gap-4"
             >
               <div>
-                <span className="meta-label text-[#C9A96E] block mb-1">Step 3 of 3</span>
+                <span className="meta-label text-[#D4AF37] block mb-1">Step 3 of 3</span>
                 <h3 className="font-serif-display text-2xl font-light">
                   Savings & First Goal
                 </h3>
-                <p className={`text-xs ${isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'}`}>
+                <p className={`text-xs ${isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'}`}>
                   Lock away funds first so you can travel or buy things guilt-free.
                 </p>
               </div>
 
               {/* Savings Rate Buttons */}
               <div>
-                <label className="text-[11px] meta-label text-[#8A8A8F] mb-1.5 block">
+                <label className="text-[11px] meta-label text-[#94A3B8] mb-1.5 block">
                   Savings Rate ({savingsRate}%)
                 </label>
                 <div className="grid grid-cols-4 gap-2">
@@ -327,10 +323,10 @@ export const Onboarding: React.FC = () => {
                       onClick={() => setSavingsRate(rate)}
                       className={`py-2 rounded-xl text-xs font-medium border transition-all ${
                         savingsRate === rate
-                          ? 'border-[#C9A96E] bg-[#C9A96E]/20 text-[#C9A96E]'
+                          ? 'border-[#D4AF37] bg-[#D4AF37]/20 text-[#D4AF37]'
                           : isDark
-                          ? 'border-white/5 bg-[#131315] text-[#8A8A8F]'
-                          : 'border-black/5 bg-white text-[#75736E]'
+                          ? 'border-white/5 bg-[#10121A] text-[#94A3B8]'
+                          : 'border-black/5 bg-white text-[#64748B]'
                       }`}
                     >
                       {rate}%
@@ -341,7 +337,7 @@ export const Onboarding: React.FC = () => {
 
               {/* First Goal */}
               <div className="flex flex-col gap-2 pt-1">
-                <label className="text-[11px] meta-label text-[#8A8A8F] block">
+                <label className="text-[11px] meta-label text-[#94A3B8] block">
                   Name your first goal
                 </label>
                 <input
@@ -350,7 +346,7 @@ export const Onboarding: React.FC = () => {
                   onChange={(e) => setGoalName(e.target.value)}
                   placeholder="e.g. Goa Trip, New Phone"
                   className={`w-full px-3.5 py-2.5 rounded-xl border text-sm outline-none ${
-                    isDark ? 'bg-[#131315] border-white/10' : 'bg-white border-black/10'
+                    isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
                   }`}
                 />
                 <input
@@ -359,7 +355,7 @@ export const Onboarding: React.FC = () => {
                   onChange={(e) => setGoalTarget(e.target.value)}
                   placeholder="Target (₹)"
                   className={`w-full px-3.5 py-2.5 rounded-xl border font-serif-display text-lg tnum outline-none ${
-                    isDark ? 'bg-[#131315] border-white/10' : 'bg-white border-black/10'
+                    isDark ? 'bg-[#10121A] border-white/10' : 'bg-white border-black/10'
                   }`}
                 />
               </div>
@@ -367,13 +363,13 @@ export const Onboarding: React.FC = () => {
               {/* Calculated Spendable Summary */}
               <Card
                 variant="elevated"
-                className="border-[#C9A96E]/30 bg-[#C9A96E]/5 p-4 flex flex-col gap-1 text-center"
+                className="border-[#D4AF37]/30 bg-[#D4AF37]/5 p-4 flex flex-col gap-1 text-center"
               >
-                <span className="meta-label text-[#8A8A8F]">Auto-Computed Monthly Spendable</span>
-                <span className="font-serif-display text-3xl text-[#C9A96E] tnum">
+                <span className="meta-label text-[#94A3B8]">Auto-Computed Monthly Spendable</span>
+                <span className="font-serif-display text-3xl text-[#D4AF37] tnum">
                   {formatINR(spendable)}
                 </span>
-                <span className="text-[11px] text-[#8A8A8F]">
+                <span className="text-[11px] text-[#94A3B8]">
                   ≈ {formatINR(weeklyEstimate)} per week ({formatINR(Math.round(weeklyEstimate / 7))}/day)
                 </span>
               </Card>
@@ -382,7 +378,7 @@ export const Onboarding: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Footer Navigation & Explore Demo Data */}
+      {/* Footer Navigation */}
       <div className="flex flex-col gap-3 max-w-[420px] mx-auto w-full">
         <div className="flex items-center gap-2">
           {step > 1 && (
@@ -399,7 +395,7 @@ export const Onboarding: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep((s) => (s + 1) as 2 | 3)}
-              className="flex-1 py-3.5 rounded-2xl bg-[#C9A96E] hover:bg-[#D7BC88] text-[#0B0B0C] font-serif-display text-base tracking-wide font-medium flex items-center justify-center gap-2 transition-colors"
+              className="flex-1 py-3.5 rounded-2xl bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] font-serif-display text-base tracking-wide font-medium flex items-center justify-center gap-2 transition-colors shadow-sm"
             >
               <span>Continue</span>
               <ArrowRight strokeWidth={1.5} className="w-4 h-4" />
@@ -408,7 +404,7 @@ export const Onboarding: React.FC = () => {
             <button
               type="button"
               onClick={handleFinish}
-              className="flex-1 py-3.5 rounded-2xl bg-[#C9A96E] hover:bg-[#D7BC88] text-[#0B0B0C] font-serif-display text-base tracking-wide font-medium flex items-center justify-center gap-2 transition-colors"
+              className="flex-1 py-3.5 rounded-2xl bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] font-serif-display text-base tracking-wide font-medium flex items-center justify-center gap-2 transition-colors shadow-sm"
             >
               <span>Enter Chillar</span>
               <Check strokeWidth={1.5} className="w-4 h-4" />
@@ -421,7 +417,7 @@ export const Onboarding: React.FC = () => {
           type="button"
           onClick={handleFinish}
           className={`py-2 text-xs transition-colors flex items-center justify-center gap-1.5 ${
-            isDark ? 'text-[#8A8A8F] hover:text-[#C9A96E]' : 'text-[#75736E] hover:text-[#C9A96E]'
+            isDark ? 'text-[#94A3B8] hover:text-[#D4AF37]' : 'text-[#64748B] hover:text-[#D4AF37]'
           }`}
         >
           <span>Skip setup & start with blank ledger</span>

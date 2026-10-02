@@ -39,7 +39,7 @@ export const Goals: React.FC = () => {
   const [goalTarget, setGoalTarget] = useState('');
   const [goalTargetDate, setGoalTargetDate] = useState('');
   const [goalRoundUp, setGoalRoundUp] = useState(false);
-  const [goalColor, setGoalColor] = useState('#C9A96E');
+  const [goalColor, setGoalColor] = useState('#D4AF37');
 
   // Goal Details & Actions Sheet
   const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
@@ -102,7 +102,7 @@ export const Goals: React.FC = () => {
     }
   };
 
-  const paletteColors = ['#C9A96E', '#7FA38A', '#9585BA', '#C77D6B', '#7B92A8'];
+  const paletteColors = ['#D4AF37', '#10B981', '#6366F1', '#F43F5E', '#0EA5E9'];
 
   return (
     <div className="flex flex-col gap-6 pb-24">
@@ -110,7 +110,7 @@ export const Goals: React.FC = () => {
       <div className="flex items-center justify-between pt-1">
         <div>
           <h2 className="font-serif-display text-2xl font-light">Goals & Desires</h2>
-          <span className="text-xs text-[#8A8A8F]">
+          <span className="text-xs text-[#94A3B8]">
             Dedicated funds for trips, movies, & tech
           </span>
         </div>
@@ -118,7 +118,7 @@ export const Goals: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsCreatingGoal(true)}
-          className="p-2 rounded-2xl border border-[#C9A96E]/30 text-[#C9A96E] hover:bg-[#C9A96E]/10 transition-colors flex items-center gap-1 text-xs font-medium"
+          className="p-2 rounded-2xl border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-colors flex items-center gap-1 text-xs font-medium"
         >
           <Plus strokeWidth={1.5} className="w-4 h-4" />
           <span>New Goal</span>
@@ -308,11 +308,11 @@ export const Goals: React.FC = () => {
           <div className="flex flex-col gap-4 pb-6">
             {/* Goal Celebration Banner if completed */}
             {selectedGoal.saved >= selectedGoal.target && (
-              <div className="p-4 rounded-2xl border border-[#C9A96E] bg-[#C9A96E]/10 animate-shimmer text-center flex flex-col items-center">
-                <span className="font-serif-display text-xl text-[#C9A96E] mb-1">
+              <div className="p-4 rounded-2xl border border-[#D4AF37] bg-[#D4AF37]/10 animate-shimmer text-center flex flex-col items-center">
+                <span className="font-serif-display text-xl text-[#D4AF37] mb-1">
                   Goal Accomplished
                 </span>
-                <p className="text-xs text-[#8A8A8F]">
+                <p className="text-xs text-[#94A3B8]">
                   You successfully saved {formatINR(selectedGoal.target)}. Ready to enjoy!
                 </p>
               </div>
@@ -321,14 +321,14 @@ export const Goals: React.FC = () => {
             {/* Current Status */}
             <div className="flex items-center justify-between p-4 rounded-2xl bg-inherit border border-inherit">
               <div>
-                <span className="meta-label text-[#8A8A8F] block mb-1">Saved So Far</span>
-                <span className="font-serif-display text-3xl tnum text-[#C9A96E]">
+                <span className="meta-label text-[#94A3B8] block mb-1">Saved So Far</span>
+                <span className="font-serif-display text-3xl tnum text-[#D4AF37]">
                   {formatINR(selectedGoal.saved)}
                 </span>
               </div>
               <div className="text-right">
-                <span className="meta-label text-[#8A8A8F] block mb-1">Remaining</span>
-                <span className="font-serif-display text-2xl tnum text-[#8A8A8F]">
+                <span className="meta-label text-[#94A3B8] block mb-1">Remaining</span>
+                <span className="font-serif-display text-2xl tnum text-[#94A3B8]">
                   {formatINR(Math.max(0, selectedGoal.target - selectedGoal.saved))}
                 </span>
               </div>
@@ -341,11 +341,11 @@ export const Goals: React.FC = () => {
                 onClick={() => setActionType('contribute')}
                 className={`py-3 rounded-2xl border text-xs font-medium flex items-center justify-center gap-1.5 transition-colors ${
                   actionType === 'contribute'
-                    ? 'border-[#C9A96E] bg-[#C9A96E]/15 text-[#C9A96E]'
-                    : 'border-inherit hover:border-[#C9A96E]/40'
+                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#D4AF37]'
+                    : 'border-inherit hover:border-[#D4AF37]/40'
                 }`}
               >
-                <ArrowDownLeft strokeWidth={1.5} className="w-4 h-4 text-[#7FA38A]" />
+                <ArrowDownLeft strokeWidth={1.5} className="w-4 h-4 text-[#10B981]" />
                 <span>Add to Goal</span>
               </button>
 
@@ -354,19 +354,19 @@ export const Goals: React.FC = () => {
                 onClick={() => setActionType('withdraw')}
                 className={`py-3 rounded-2xl border text-xs font-medium flex items-center justify-center gap-1.5 transition-colors ${
                   actionType === 'withdraw'
-                    ? 'border-[#C9A96E] bg-[#C9A96E]/15 text-[#C9A96E]'
-                    : 'border-inherit hover:border-[#C9A96E]/40'
+                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#D4AF37]'
+                    : 'border-inherit hover:border-[#D4AF37]/40'
                 }`}
               >
-                <ArrowUpRight strokeWidth={1.5} className="w-4 h-4 text-[#C77D6B]" />
+                <ArrowUpRight strokeWidth={1.5} className="w-4 h-4 text-[#F43F5E]" />
                 <span>Withdraw</span>
               </button>
             </div>
 
             {/* Action Input Form */}
             {actionType && (
-              <div className="p-4 rounded-2xl border border-[#C9A96E]/30 bg-[#C9A96E]/5 flex flex-col gap-3">
-                <span className="meta-label text-[#8A8A8F]">
+              <div className="p-4 rounded-2xl border border-[#D4AF37]/30 bg-[#D4AF37]/5 flex flex-col gap-3">
+                <span className="meta-label text-[#94A3B8]">
                   {actionType === 'contribute' ? 'Amount to deposit (₹)' : 'Amount to withdraw (₹)'}
                 </span>
                 <input
@@ -376,8 +376,8 @@ export const Goals: React.FC = () => {
                   onChange={(e) => setActionAmount(e.target.value)}
                   className={`w-full px-4 py-2.5 rounded-xl border font-serif-display text-xl tnum outline-none ${
                     isDark
-                      ? 'bg-[#1A1A1D] border-white/10 text-[#C9A96E]'
-                      : 'bg-[#EFECE6] border-black/10 text-[#C9A96E]'
+                      ? 'bg-[#181B26] border-white/10 text-[#D4AF37]'
+                      : 'bg-[#F1F5F9] border-black/10 text-[#D4AF37]'
                   }`}
                 />
                 <input
@@ -386,13 +386,13 @@ export const Goals: React.FC = () => {
                   value={actionNote}
                   onChange={(e) => setActionNote(e.target.value)}
                   className={`w-full px-3 py-2 rounded-xl border text-xs outline-none ${
-                    isDark ? 'bg-[#1A1A1D] border-white/10' : 'bg-[#EFECE6] border-black/10'
+                    isDark ? 'bg-[#181B26] border-white/10' : 'bg-[#F1F5F9] border-black/10'
                   }`}
                 />
                 <button
                   type="button"
                   onClick={handleExecuteAction}
-                  className="py-2.5 rounded-xl bg-[#C9A96E] text-[#0B0B0C] text-xs font-medium hover:bg-[#D7BC88] transition-colors"
+                  className="py-2.5 rounded-xl bg-[#D4AF37] text-[#08090C] text-xs font-semibold hover:bg-[#E5C358] transition-colors"
                 >
                   Confirm {actionType === 'contribute' ? 'Deposit' : 'Withdrawal'}
                 </button>
@@ -404,15 +404,15 @@ export const Goals: React.FC = () => {
               onClick={() => handleToggleRoundUp(selectedGoal.id, selectedGoal.roundUpEnabled)}
               className={`flex items-center justify-between p-3.5 rounded-2xl border cursor-pointer transition-colors ${
                 selectedGoal.roundUpEnabled
-                  ? 'border-[#C9A96E]/30 bg-[#C9A96E]/5'
+                  ? 'border-[#D4AF37]/30 bg-[#D4AF37]/5'
                   : 'border-inherit'
               }`}
             >
               <div className="flex items-center gap-2">
-                <Zap strokeWidth={1.5} className="w-4 h-4 text-[#C9A96E]" />
+                <Zap strokeWidth={1.5} className="w-4 h-4 text-[#D4AF37]" />
                 <div>
                   <h5 className="text-xs font-medium">Round-Up Micro Savings</h5>
-                  <p className="text-[11px] text-[#8A8A8F]">
+                  <p className="text-[11px] text-[#94A3B8]">
                     Round daily expenses up to ₹10 into this goal
                   </p>
                 </div>
@@ -421,8 +421,8 @@ export const Goals: React.FC = () => {
               <div
                 className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${
                   selectedGoal.roundUpEnabled
-                    ? 'bg-[#C9A96E] border-[#C9A96E] text-[#0B0B0C]'
-                    : 'border-[#8A8A8F]'
+                    ? 'bg-[#D4AF37] border-[#D4AF37] text-[#08090C]'
+                    : 'border-[#94A3B8]'
                 }`}
               >
                 {selectedGoal.roundUpEnabled && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -432,25 +432,25 @@ export const Goals: React.FC = () => {
             {/* Contribution History */}
             <div className="flex flex-col gap-2 pt-2">
               <div className="flex items-center gap-1.5">
-                <History strokeWidth={1.5} className="w-3.5 h-3.5 text-[#8A8A8F]" />
-                <span className="meta-label text-[#8A8A8F]">History of Contributions</span>
+                <History strokeWidth={1.5} className="w-3.5 h-3.5 text-[#94A3B8]" />
+                <span className="meta-label text-[#94A3B8]">History of Contributions</span>
               </div>
 
               {selectedGoal.contributions.length === 0 ? (
-                <p className="text-xs text-[#8A8A8F] py-2">No contributions logged yet.</p>
+                <p className="text-xs text-[#94A3B8] py-2">No contributions logged yet.</p>
               ) : (
                 <div className="divide-y divide-inherit rounded-2xl border border-inherit overflow-hidden">
                   {selectedGoal.contributions.map((c) => (
                     <div key={c.id} className="p-3 flex items-center justify-between text-xs">
                       <div>
                         <span className="font-medium block">{c.note || 'Contribution'}</span>
-                        <span className="text-[10px] text-[#8A8A8F]">
+                        <span className="text-[10px] text-[#94A3B8]">
                           {formatDate(c.date, 'd MMM yyyy')}
                         </span>
                       </div>
                       <span
                         className={`font-serif-display text-sm tnum ${
-                          c.amount >= 0 ? 'text-[#7FA38A]' : 'text-[#C77D6B]'
+                          c.amount >= 0 ? 'text-[#10B981]' : 'text-[#F43F5E]'
                         }`}
                       >
                         {c.amount >= 0 ? `+${formatINR(c.amount)}` : formatINR(c.amount)}
@@ -469,7 +469,7 @@ export const Goals: React.FC = () => {
                   deleteGoal(selectedGoal.id);
                   setSelectedGoal(null);
                 }}
-                className="w-full py-2.5 rounded-2xl border border-[#C77D6B]/30 text-[#C77D6B] hover:bg-[#C77D6B]/10 text-xs transition-colors"
+                className="w-full py-2.5 rounded-2xl border border-[#F43F5E]/30 text-[#F43F5E] hover:bg-[#F43F5E]/10 text-xs transition-colors"
               >
                 Delete this goal
               </button>
@@ -487,7 +487,7 @@ export const Goals: React.FC = () => {
       >
         <div className="flex flex-col gap-4 pb-4">
           <div>
-            <span className="meta-label text-[#8A8A8F] mb-1 block">Goal Name</span>
+            <span className="meta-label text-[#94A3B8] mb-1 block">Goal Name</span>
             <input
               type="text"
               placeholder="e.g. Goa Trip, New Laptop, Concert"
@@ -495,14 +495,14 @@ export const Goals: React.FC = () => {
               onChange={(e) => setGoalName(e.target.value)}
               className={`w-full px-3.5 py-2.5 rounded-2xl border text-sm outline-none ${
                 isDark
-                  ? 'bg-[#1A1A1D] border-white/10 text-[#F4F2EE]'
-                  : 'bg-[#EFECE6] border-black/10 text-[#111111]'
+                  ? 'bg-[#181B26] border-white/10 text-[#F8FAFC]'
+                  : 'bg-[#F1F5F9] border-black/10 text-[#0F172A]'
               }`}
             />
           </div>
 
           <div>
-            <span className="meta-label text-[#8A8A8F] mb-1 block">Target Amount (₹)</span>
+            <span className="meta-label text-[#94A3B8] mb-1 block">Target Amount (₹)</span>
             <input
               type="number"
               placeholder="e.g. 8000"
@@ -510,27 +510,27 @@ export const Goals: React.FC = () => {
               onChange={(e) => setGoalTarget(e.target.value)}
               className={`w-full px-4 py-3 rounded-2xl border font-serif-display text-2xl tnum outline-none ${
                 isDark
-                  ? 'bg-[#1A1A1D] border-white/10 text-[#C9A96E]'
-                  : 'bg-[#EFECE6] border-black/10 text-[#C9A96E]'
+                  ? 'bg-[#181B26] border-white/10 text-[#D4AF37]'
+                  : 'bg-[#F1F5F9] border-black/10 text-[#D4AF37]'
               }`}
             />
           </div>
 
           <div>
-            <span className="meta-label text-[#8A8A8F] mb-1 block">Target Date</span>
+            <span className="meta-label text-[#94A3B8] mb-1 block">Target Date</span>
             <input
               type="date"
               value={goalTargetDate}
               onChange={(e) => setGoalTargetDate(e.target.value)}
               className={`w-full px-3.5 py-2.5 rounded-2xl border text-xs outline-none ${
-                isDark ? 'bg-[#1A1A1D] border-white/10' : 'bg-[#EFECE6] border-black/10'
+                isDark ? 'bg-[#181B26] border-white/10' : 'bg-[#F1F5F9] border-black/10'
               }`}
             />
           </div>
 
           {/* Palette Color Selection */}
           <div>
-            <span className="meta-label text-[#8A8A8F] mb-2 block">Cover Accent</span>
+            <span className="meta-label text-[#94A3B8] mb-2 block">Cover Accent</span>
             <div className="flex gap-3">
               {paletteColors.map((color) => (
                 <button
@@ -538,7 +538,7 @@ export const Goals: React.FC = () => {
                   type="button"
                   onClick={() => setGoalColor(color)}
                   className={`w-7 h-7 rounded-full transition-transform ${
-                    goalColor === color ? 'scale-125 ring-2 ring-[#C9A96E]' : 'opacity-80'
+                    goalColor === color ? 'scale-125 ring-2 ring-[#D4AF37]' : 'opacity-80'
                   }`}
                   style={{ backgroundColor: color }}
                 />
@@ -550,7 +550,7 @@ export const Goals: React.FC = () => {
             type="button"
             onClick={handleCreateGoal}
             disabled={!goalName.trim() || !goalTarget}
-            className="w-full py-3.5 rounded-2xl bg-[#C9A96E] hover:bg-[#D7BC88] text-[#0B0B0C] font-serif-display text-base tracking-wide font-medium transition-colors disabled:opacity-50"
+            className="w-full py-3.5 rounded-2xl bg-[#D4AF37] hover:bg-[#E5C358] text-[#08090C] font-serif-display text-base tracking-wide font-semibold transition-colors disabled:opacity-50"
           >
             Create Goal
           </button>

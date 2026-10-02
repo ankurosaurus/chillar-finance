@@ -28,13 +28,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   const percentage = Math.min(100, Math.max(0, (value / max) * 100));
   const markerPct = Math.min(100, Math.max(0, paceMarkerPosition));
 
-  let barBg = 'bg-[#C9A96E]';
-  if (color === 'sage') barBg = 'bg-[#7FA38A]';
-  if (color === 'terracotta' || isOverCap || percentage >= 100) barBg = 'bg-[#C77D6B]';
+  let barBg = 'bg-[#D4AF37]';
+  if (color === 'sage') barBg = 'bg-[#10B981]';
+  if (color === 'terracotta' || isOverCap || percentage >= 100) barBg = 'bg-[#F43F5E]';
   if (color === 'auto') {
-    if (percentage > 90) barBg = 'bg-[#C77D6B]';
-    else if (percentage > 70) barBg = 'bg-[#C9A96E]';
-    else barBg = 'bg-[#7FA38A]';
+    if (percentage > 90) barBg = 'bg-[#F43F5E]';
+    else if (percentage > 70) barBg = 'bg-[#D4AF37]';
+    else barBg = 'bg-[#10B981]';
   }
 
   const trackBg = isDark ? 'bg-white/[0.08]' : 'bg-black/[0.06]';

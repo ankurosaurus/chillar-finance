@@ -56,12 +56,12 @@ export const Keypad: React.FC<KeypadProps> = ({
   };
 
   const keyBg = isDark
-    ? 'bg-[#1A1A1D] hover:bg-[#222226] active:bg-[#2A2A2F] text-[#F4F2EE]'
-    : 'bg-[#EFECE6] hover:bg-[#E5E1D8] active:bg-[#DCD8CE] text-[#111111]';
+    ? 'bg-[#181B26] hover:bg-[#202433] active:bg-[#282D40] text-[#F8FAFC]'
+    : 'bg-[#F1F5F9] hover:bg-[#E2E8F0] active:bg-[#CBD5E1] text-[#0F172A]';
 
   const borderClass = isDark
-    ? 'border-[rgba(255,255,255,0.06)]'
-    : 'border-[rgba(0,0,0,0.06)]';
+    ? 'border-[rgba(255,255,255,0.08)]'
+    : 'border-[rgba(15,23,42,0.08)]';
 
   const keys = [
     ['1', '2', '3'],

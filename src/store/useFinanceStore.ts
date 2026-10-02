@@ -92,6 +92,15 @@ function simpleHash(str: string): string {
   return `pin_${Math.abs(hash).toString(16)}`;
 }
 
+// Purge any stale mock storage from previous versions so real user input is always used
+if (typeof window !== 'undefined') {
+  try {
+    ['chillar:store', 'chillar:store:v1', 'chillar:store:v2', 'chillar:store:v3', 'chillar:store:v4', 'chillar:store:v5'].forEach((k) => {
+      localStorage.removeItem(k);
+    });
+  } catch (_) {}
+}
+
 export const useFinanceStore = create<FinanceState>()(
   persist(
     (set, get) => ({
@@ -573,6 +582,7 @@ export const useFinanceStore = create<FinanceState>()(
           categories: INITIAL_CATEGORIES,
           goals: [],
           challenges: [],
+          dayPlans: {},
           alerts: [],
           activeTab: 'home',
           isLocked: false,
@@ -634,7 +644,7 @@ export const useFinanceStore = create<FinanceState>()(
       },
     }),
     {
-      name: 'chillar:store',
+      name: 'chillar:store:v6',
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         profile: state.profile,

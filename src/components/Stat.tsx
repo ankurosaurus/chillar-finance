@@ -22,14 +22,14 @@ export const Stat: React.FC<StatProps> = ({
 
   const textColor =
     variant === 'gold'
-      ? 'text-[#C9A96E]'
+      ? 'text-[#D4AF37]'
       : variant === 'sage'
-      ? 'text-[#7FA38A]'
+      ? 'text-[#10B981]'
       : variant === 'terracotta'
-      ? 'text-[#C77D6B]'
+      ? 'text-[#F43F5E]'
       : isDark
-      ? 'text-[#F4F2EE]'
-      : 'text-[#111111]';
+      ? 'text-[#F8FAFC]'
+      : 'text-[#0F172A]';
 
   const sizeClass =
     size === 'hero'
@@ -44,7 +44,7 @@ export const Stat: React.FC<StatProps> = ({
     <div className={`flex flex-col gap-1 ${className}`}>
       <span
         className={`meta-label ${
-          isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'
+          isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'
         }`}
       >
         {label}
@@ -55,7 +55,7 @@ export const Stat: React.FC<StatProps> = ({
       {subtitle && (
         <div
           className={`text-xs mt-0.5 ${
-            isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'
+            isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'
           }`}
         >
           {subtitle}

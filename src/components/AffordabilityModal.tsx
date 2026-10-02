@@ -38,7 +38,7 @@ export const AffordabilityModal: React.FC = () => {
       <div className="flex flex-col gap-5 pb-6">
         {/* Prospective Amount Entry */}
         <div className="flex flex-col items-center">
-          <span className="meta-label text-[#8A8A8F] mb-1">
+          <span className="meta-label text-[#94A3B8] mb-1">
             Prospective Expense
           </span>
           <button
@@ -46,11 +46,11 @@ export const AffordabilityModal: React.FC = () => {
             onClick={() => setShowKeypad(!showKeypad)}
             className="flex items-baseline gap-1 py-1 px-4 rounded-2xl hover:bg-white/5 transition-colors"
           >
-            <span className="font-serif-display text-4xl md:text-5xl font-light tnum text-[#C9A96E]">
+            <span className="font-serif-display text-4xl md:text-5xl font-light tnum text-[#D4AF37]">
               {formatINR(amount)}
             </span>
           </button>
-          <span className="text-[11px] text-[#8A8A8F] mt-1">
+          <span className="text-[11px] text-[#94A3B8] mt-1">
             {showKeypad ? 'Tap amount to minimize keypad' : 'Tap amount to change'}
           </span>
         </div>
@@ -65,10 +65,10 @@ export const AffordabilityModal: React.FC = () => {
                 onClick={() => setAmountStr(preset.toString())}
                 className={`px-3 py-1 text-xs rounded-full border transition-all ${
                   amount === preset
-                    ? 'border-[#C9A96E] bg-[#C9A96E]/15 text-[#C9A96E]'
+                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#D4AF37]'
                     : isDark
-                    ? 'border-white/10 hover:border-white/20 text-[#8A8A8F]'
-                    : 'border-black/10 hover:border-black/20 text-[#75736E]'
+                    ? 'border-white/10 hover:border-white/20 text-[#94A3B8]'
+                    : 'border-black/10 hover:border-black/20 text-[#64748B]'
                 }`}
               >
                 ₹{preset}
@@ -93,27 +93,27 @@ export const AffordabilityModal: React.FC = () => {
           variant="elevated"
           className={
             analysis.weeklyBudgetStatus === 'exceeded'
-              ? 'border-[#C77D6B]/40 bg-[#C77D6B]/10'
+              ? 'border-[#F43F5E]/40 bg-[#F43F5E]/10'
               : analysis.weeklyBudgetStatus === 'tight'
-              ? 'border-[#C9A96E]/40 bg-[#C9A96E]/10'
-              : 'border-[#7FA38A]/40 bg-[#7FA38A]/10'
+              ? 'border-[#D4AF37]/40 bg-[#D4AF37]/10'
+              : 'border-[#10B981]/40 bg-[#10B981]/10'
           }
         >
           <div className="flex items-center gap-2 mb-1.5">
             {analysis.weeklyBudgetStatus === 'exceeded' ? (
-              <AlertCircle className="w-5 h-5 text-[#C77D6B]" />
+              <AlertCircle className="w-5 h-5 text-[#F43F5E]" />
             ) : analysis.weeklyBudgetStatus === 'tight' ? (
-              <Sparkles className="w-5 h-5 text-[#C9A96E]" />
+              <Sparkles className="w-5 h-5 text-[#D4AF37]" />
             ) : (
-              <CheckCircle2 className="w-5 h-5 text-[#7FA38A]" />
+              <CheckCircle2 className="w-5 h-5 text-[#10B981]" />
             )}
             <h4
               className={`font-serif-display text-lg ${
                 analysis.weeklyBudgetStatus === 'exceeded'
-                  ? 'text-[#C77D6B]'
+                  ? 'text-[#F43F5E]'
                   : analysis.weeklyBudgetStatus === 'tight'
-                  ? 'text-[#C9A96E]'
-                  : 'text-[#7FA38A]'
+                  ? 'text-[#D4AF37]'
+                  : 'text-[#10B981]'
               }`}
             >
               {analysis.verdict}
@@ -121,7 +121,7 @@ export const AffordabilityModal: React.FC = () => {
           </div>
           <p
             className={`text-xs leading-relaxed ${
-              isDark ? 'text-[#F4F2EE]/90' : 'text-[#111111]/90'
+              isDark ? 'text-[#F8FAFC]/90' : 'text-[#0F172A]/90'
             }`}
           >
             {analysis.recommendationNote}
@@ -131,27 +131,27 @@ export const AffordabilityModal: React.FC = () => {
         {/* Breakdown Before vs After */}
         <div className="grid grid-cols-2 gap-3">
           <Card className="flex flex-col gap-1 p-4">
-            <span className="meta-label text-[#8A8A8F]">Safe Today Now</span>
+            <span className="meta-label text-[#94A3B8]">Safe Today Now</span>
             <span className="font-serif-display text-2xl tnum">
               {formatINR(analysis.currentSafeToday)}
             </span>
-            <span className="text-[11px] text-[#8A8A8F]">
+            <span className="text-[11px] text-[#94A3B8]">
               ₹{analysis.currentWeeklyRemaining} left this week
             </span>
           </Card>
 
           <Card className="flex flex-col gap-1 p-4">
-            <span className="meta-label text-[#8A8A8F]">Safe After Spend</span>
+            <span className="meta-label text-[#94A3B8]">Safe After Spend</span>
             <span
               className={`font-serif-display text-2xl tnum ${
                 analysis.newSafeToday < 100
-                  ? 'text-[#C77D6B]'
-                  : 'text-[#C9A96E]'
+                  ? 'text-[#F43F5E]'
+                  : 'text-[#D4AF37]'
               }`}
             >
               {formatINR(analysis.newSafeToday)}
             </span>
-            <span className="text-[11px] text-[#8A8A8F]">
+            <span className="text-[11px] text-[#94A3B8]">
               ₹{analysis.newWeeklyRemaining} left this week
             </span>
           </Card>
@@ -160,18 +160,18 @@ export const AffordabilityModal: React.FC = () => {
         {/* Goal Impact */}
         {analysis.goalImpact && (
           <Card className="p-4 flex items-start gap-3">
-            <Clock strokeWidth={1.5} className="w-5 h-5 text-[#C9A96E] shrink-0 mt-0.5" />
+            <Clock strokeWidth={1.5} className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
             <div>
-              <span className="meta-label text-[#8A8A8F] block mb-1">
+              <span className="meta-label text-[#94A3B8] block mb-1">
                 Impact on "{analysis.goalImpact.goalName}"
               </span>
               <p
                 className={`text-xs leading-relaxed ${
-                  isDark ? 'text-[#8A8A8F]' : 'text-[#75736E]'
+                  isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'
                 }`}
               >
                 Spending this amount equals{' '}
-                <strong className={isDark ? 'text-[#F4F2EE]' : 'text-[#111111]'}>
+                <strong className={isDark ? 'text-[#F8FAFC]' : 'text-[#0F172A]'}>
                   ~{analysis.goalImpact.delayDaysEstimate} days
                 </strong>{' '}
                 of goal savings pace.
