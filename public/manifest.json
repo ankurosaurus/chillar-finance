@@ -1,0 +1,17 @@
+{
+  "short_name": "chillar",
+  "name": "chillar",
+  "description": "Every rupee, accounted for.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0B0B0C",
+  "theme_color": "#0B0B0C",
+  "display": "standalone",
+  "orientation": "portrait"
+}

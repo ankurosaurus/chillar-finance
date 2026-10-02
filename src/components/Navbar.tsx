@@ -1,0 +1,134 @@
+import React from 'react';
+import {
+  Home,
+  ReceiptText,
+  SlidersHorizontal,
+  Target,
+  BarChart3,
+  Plus,
+} from 'lucide-react';
+import { useFinanceStore } from '../store/useFinanceStore';
+import { useTheme } from '../hooks/useTheme';
+
+export const Navbar: React.FC = () => {
+  const { isDark } = useTheme();
+  const activeTab = useFinanceStore((state) => state.activeTab);
+  const setActiveTab = useFinanceStore((state) => state.setActiveTab);
+  const setQuickAddOpen = useFinanceStore((state) => state.setQuickAddOpen);
+
+  const navItems = [
+    { id: 'home', label: 'Home', icon: Home },
+    { id: 'ledger', label: 'Ledger', icon: ReceiptText },
+    // Center FAB occupies middle
+    { id: 'budgets', label: 'Budgets', icon: SlidersHorizontal },
+    { id: 'goals', label: 'Goals', icon: Target },
+    { id: 'insights', label: 'Insights', icon: BarChart3 },
+  ] as const;
+
+  const barBg = isDark ? 'bg-[#131315]/90' : 'bg-[#FFFFFF]/90';
+  const borderClass = isDark
+    ? 'border-t border-[rgba(255,255,255,0.07)]'
+    : 'border-t border-[rgba(0,0,0,0.08)]';
+
+  return (
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none pb-safe">
+      <nav
+        className={`w-full max-w-[480px] pointer-events-auto backdrop-blur-lg ${barBg} ${borderClass} px-3 py-2 flex items-center justify-around relative`}
+      >
+        {/* Left items: Home, Ledger */}
+        <button
+          type="button"
+          onClick={() => setActiveTab('home')}
+          className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
+            activeTab === 'home'
+              ? 'text-[#C9A96E]'
+              : isDark
+              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
+              : 'text-[#75736E] hover:text-[#111111]'
+          }`}
+          aria-label="Home"
+        >
+          <Home strokeWidth={1.5} className="w-5 h-5" />
+          <span className="text-[10px] tracking-wide font-normal">Home</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab('ledger')}
+          className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
+            activeTab === 'ledger'
+              ? 'text-[#C9A96E]'
+              : isDark
+              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
+              : 'text-[#75736E] hover:text-[#111111]'
+          }`}
+          aria-label="Ledger"
+        >
+          <ReceiptText strokeWidth={1.5} className="w-5 h-5" />
+          <span className="text-[10px] tracking-wide font-normal">Ledger</span>
+        </button>
+
+        {/* Centered Floating Quick Add "+" Button */}
+        <div className="relative -top-4 flex justify-center px-1">
+          <button
+            type="button"
+            onClick={() => setQuickAddOpen(true)}
+            className="w-13 h-13 rounded-full bg-[#C9A96E] hover:bg-[#D7BC88] active:scale-95 text-[#0B0B0C] flex items-center justify-center shadow-lg transition-transform duration-150 border-2 border-[#0B0B0C]"
+            aria-label="Quick Add"
+          >
+            <Plus strokeWidth={2} className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Right items: Budgets, Goals, Insights */}
+        <button
+          type="button"
+          onClick={() => setActiveTab('budgets')}
+          className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
+            activeTab === 'budgets'
+              ? 'text-[#C9A96E]'
+              : isDark
+              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
+              : 'text-[#75736E] hover:text-[#111111]'
+          }`}
+          aria-label="Budgets"
+        >
+          <SlidersHorizontal strokeWidth={1.5} className="w-5 h-5" />
+          <span className="text-[10px] tracking-wide font-normal">Budgets</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab('goals')}
+          className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
+            activeTab === 'goals'
+              ? 'text-[#C9A96E]'
+              : isDark
+              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
+              : 'text-[#75736E] hover:text-[#111111]'
+          }`}
+          aria-label="Goals"
+        >
+          <Target strokeWidth={1.5} className="w-5 h-5" />
+          <span className="text-[10px] tracking-wide font-normal">Goals</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab('insights')}
+          className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
+            activeTab === 'insights'
+              ? 'text-[#C9A96E]'
+              : isDark
+              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
+              : 'text-[#75736E] hover:text-[#111111]'
+          }`}
+          aria-label="Insights"
+        >
+          <BarChart3 strokeWidth={1.5} className="w-5 h-5" />
+          <span className="text-[10px] tracking-wide font-normal">Insights</span>
+        </button>
+      </nav>
+    </div>
+  );
+};
