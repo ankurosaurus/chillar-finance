@@ -8,14 +8,27 @@ import {
   calculateRoundUp,
   analyzeAffordability,
 } from './budgetMath';
-import { INITIAL_PROFILE, INITIAL_CATEGORIES } from './seedData';
 import { Transaction, Goal } from '../types/finance';
 
 function runTests() {
   console.log('--- RUNNING CHILLAR BUDGET MATH UNIT TESTS ---');
 
   // Test 1: Monthly Spendable (excludes prepaid mess)
-  const spendableRes = calculateMonthlySpendable(INITIAL_PROFILE);
+  const testProfile = {
+    monthlyIncome: 12000,
+    extraIncome: 1500,
+    payDay: 1,
+    fixedCosts: [
+      { id: '1', name: 'Prepaid Mess', amount: 4500, isPrepaidMess: true },
+      { id: '2', name: 'Recharge', amount: 399 },
+      { id: '3', name: 'Laundry', amount: 350 },
+      { id: '4', name: 'Spotify', amount: 199 },
+    ],
+    savingsRatePct: 20,
+    theme: 'dark' as const,
+    onboardingCompleted: true,
+  };
+  const spendableRes = calculateMonthlySpendable(testProfile);
   console.assert(spendableRes.totalIncome === 13500, `Expected total income 13500, got ${spendableRes.totalIncome}`);
   // Fixed costs non-prepaid: 399 + 199 + 350 = 948 (4500 mess is prepaid and excluded!)
   console.assert(spendableRes.totalFixedCosts === 948, `Expected fixed costs 948, got ${spendableRes.totalFixedCosts}`);
@@ -53,7 +66,7 @@ function runTests() {
     contributions: [],
     roundUpEnabled: true,
   };
-  const aff = analyzeAffordability(400, INITIAL_PROFILE, [], mockGoal, new Date('2026-10-02'));
+  const aff = analyzeAffordability(400, testProfile, [], mockGoal, new Date('2026-10-02'));
   console.assert(aff.amount === 400, 'Expected amount 400');
   console.assert(aff.newSafeToday <= aff.currentSafeToday, 'Expected new safe today <= current safe today');
   console.assert(aff.goalImpact !== undefined, 'Expected goal impact calculated');

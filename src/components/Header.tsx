@@ -7,7 +7,7 @@ import {
   Plus,
   Home,
   ReceiptText,
-  SlidersHorizontal,
+  CalendarCheck,
   Target,
   BarChart3,
   HelpCircle,
@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
   const desktopNavItems = [
     { id: 'home', label: 'Home', icon: Home },
     { id: 'ledger', label: 'Ledger', icon: ReceiptText },
-    { id: 'budgets', label: 'Budgets', icon: SlidersHorizontal },
+    { id: 'planner', label: 'Day Planner', icon: CalendarCheck },
     { id: 'goals', label: 'Goals', icon: Target },
     { id: 'insights', label: 'Insights', icon: BarChart3 },
     { id: 'settings', label: 'Settings', icon: SettingsIcon },

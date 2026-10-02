@@ -62,12 +62,12 @@ export const Home: React.FC = () => {
 
         <button
           type="button"
-          onClick={() => setActiveTab('budgets')}
+          onClick={() => setActiveTab('planner')}
           className={`text-xs ${
             isDark ? 'text-[#94A3B8] hover:text-[#F8FAFC]' : 'text-[#64748B] hover:text-[#0F172A]'
           } flex items-center gap-0.5`}
         >
-          <span>Envelopes</span>
+          <span>Day Planner</span>
           <ChevronRight strokeWidth={1.5} className="w-3.5 h-3.5" />
         </button>
       </div>

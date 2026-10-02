@@ -25,15 +25,15 @@ In college hostels, mess food is already prepaid at the start of the semester, y
 
 - **Aesthetic**: Private Swiss banking feel—quiet, spacious, confident, hairline borders, no loud saturated colors or emoji chrome.
 - **Palette**:
-  - **Dark Default**: Background `#0B0B0C`, Surface `#131315`, Elevated `#1A1A1D`, Hairline Border `rgba(255,255,255,0.07)`, Text `#F4F2EE`, Muted Text `#8A8A8F`.
-  - **Light Theme**: Background `#F7F5F1`, Surface `#FFFFFF`, Elevated `#EFECE6`, Hairline Border `rgba(0,0,0,0.08)`, Text `#111111`, Muted Text `#75736E`.
-  - **Single Accent**: Muted Champagne Gold (`#C9A96E`).
-  - **Semantics**: Soft Sage (`#7FA38A`) for income & positive savings; Muted Terracotta (`#C77D6B`) for overspend alerts.
+  - **Dark Default**: Background `#08090C`, Surface `#10121A`, Elevated `#181B26`, Hairline Border `rgba(255,255,255,0.08)`, Text `#F8FAFC`, Muted Text `#94A3B8`.
+  - **Light Theme**: Background `#F8FAFC`, Surface `#FFFFFF`, Elevated `#F1F5F9`, Hairline Border `rgba(15,23,42,0.08)`, Text `#0F172A`, Muted Text `#64748B`.
+  - **Single Accent**: Metallic Gold (`#D4AF37`) & Champagne Amber.
+  - **Semantics**: Soft Sage/Emerald (`#10B981`) for income & positive savings; Crimson Terracotta (`#F43F5E`) for overspend alerts.
 - **Typography**:
   - Display & Numbers: **Fraunces** serif (light weights 300–400) for large numbers & headings.
   - UI Text: **Inter** (400/500).
   - All currency formatted in **Indian Numbering System (en-IN)** with `font-feature-settings: 'tnum'` (`₹12,500`, `₹1,25,000`).
-- **Cards & Layout**: 24px radius cards, 1px hairline borders instead of drop shadows, 480px max centered canvas on desktop.
+- **Cards & Layout**: Fully responsive: fluid adaptive canvas for PC / Desktop monitors up to 6xl container, plus 480px max centered mobile layout.
 
 ---
 
@@ -44,9 +44,9 @@ In college hostels, mess food is already prepaid at the start of the semester, y
 - **Tailwind CSS v4**: Modern CSS theme variables and hardware-accelerated animations.
 - **Zustand**: Reactive state management with `chillar:store` persistence in `localStorage`.
 - **Recharts**: Spending velocity area charts and category distribution donuts.
-- **Framer Motion**: Subtle, physics-based modal and keypad micro-interactions (no bouncy cartoon physics).
+- **Framer Motion**: Subtle, physics-based modal and keypad micro-interactions.
 - **Date-fns**: Pure date calculations and calendar intervals.
-- **PWA (Manifest + Service Worker)**: Offline cached and installable on iOS and Android home screens.
+- **Deployment**: Live on Vercel at [https://chillar-blush.vercel.app](https://chillar-blush.vercel.app) and GitHub at [https://github.com/ankurosaurus/chillar-finance](https://github.com/ankurosaurus/chillar-finance).
 
 ---
 
@@ -60,14 +60,14 @@ chillar/
 │   └── sw.js                # Service Worker for offline support
 ├── src/
 │   ├── components/
-│   │   ├── Card.tsx         # 24px radius hairline card
+│   │   ├── Card.tsx         # Hairline border card
 │   │   ├── Stat.tsx         # Fraunces typography stat block
 │   │   ├── ProgressBar.tsx  # Minimal progress bar with pace marker
 │   │   ├── Chip.tsx         # Tactile category & filter pill
 │   │   ├── Keypad.tsx       # Big numeric keypad (<5s entry)
 │   │   ├── Sheet.tsx        # Spring-animated bottom sheet
-│   │   ├── Header.tsx       # Wordmark, theme switcher & PIN lock
-│   │   ├── Navbar.tsx       # Bottom tab bar + center "+" FAB
+│   │   ├── Header.tsx       # Wordmark, desktop nav & controls
+│   │   ├── Navbar.tsx       # Bottom mobile tab bar + center "+" FAB
 │   │   ├── AlertBanner.tsx  # In-app soft cap & milestone toasts
 │   │   ├── LockScreen.tsx   # 4-Digit passcode screen
 │   │   ├── AffordabilityModal.tsx # "Can I afford this?" simulator
@@ -76,21 +76,21 @@ chillar/
 │   ├── pages/
 │   │   ├── Home.tsx         # Dashboard hero, pace bar & goals strip
 │   │   ├── Ledger.tsx       # Daily grouped transactions & filters
-│   │   ├── Budgets.tsx      # Category envelope manager & rollover
+│   │   ├── DayPlanner.tsx   # Financial day prior planner & today date
 │   │   ├── Goals.tsx        # Savings targets, round-ups & challenges
 │   │   ├── Insights.tsx     # Recharts velocity, heatmap & leak report
 │   │   ├── Settings.tsx     # Inflow, fixed costs, PIN, export CSV/JSON
-│   │   └── Onboarding.tsx   # 3-Step setup with demo seed data
+│   │   └── Onboarding.tsx   # 3-Step setup with real user inputs
 │   ├── store/
-│   │   └── useFinanceStore.ts # Zustand persistent store
+│   │   └── useFinanceStore.ts # Zustand persistent store with Day Planner
 │   ├── lib/
 │   │   ├── budgetMath.ts    # Pure mathematical budget utilities
 │   │   ├── budgetMath.test.ts # Unit tests for budget math
 │   │   ├── formatters.ts    # Indian currency (₹) & date formatters
 │   │   ├── insights.ts      # Heatmap, leak reports & rule-based insights
-│   │   └── seedData.ts      # Realistic college hostel sample data
+│   │   └── seedData.ts      # Zero-mock initial state
 │   ├── types/
-│   │   ├── finance.ts       # Domain data models & types
+│   │   ├── finance.ts       # Domain data models & types (DayPlan, PlannedItem)
 │   │   └── index.ts
 │   ├── hooks/
 │   │   └── useTheme.ts      # Light/dark mode manager

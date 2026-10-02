@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Home,
   ReceiptText,
-  SlidersHorizontal,
+  CalendarCheck,
   Target,
   BarChart3,
   Plus,
@@ -16,19 +16,10 @@ export const Navbar: React.FC = () => {
   const setActiveTab = useFinanceStore((state) => state.setActiveTab);
   const setQuickAddOpen = useFinanceStore((state) => state.setQuickAddOpen);
 
-  const navItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'ledger', label: 'Ledger', icon: ReceiptText },
-    // Center FAB occupies middle
-    { id: 'budgets', label: 'Budgets', icon: SlidersHorizontal },
-    { id: 'goals', label: 'Goals', icon: Target },
-    { id: 'insights', label: 'Insights', icon: BarChart3 },
-  ] as const;
-
-  const barBg = isDark ? 'bg-[#131315]/90' : 'bg-[#FFFFFF]/90';
+  const barBg = isDark ? 'bg-[#10121A]/95' : 'bg-[#FFFFFF]/95';
   const borderClass = isDark
-    ? 'border-t border-[rgba(255,255,255,0.07)]'
-    : 'border-t border-[rgba(0,0,0,0.08)]';
+    ? 'border-t border-[rgba(255,255,255,0.08)]'
+    : 'border-t border-[rgba(15,23,42,0.08)]';
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none pb-safe">
@@ -41,10 +32,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('home')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'home'
-              ? 'text-[#C9A96E]'
+              ? 'text-[#D4AF37]'
               : isDark
-              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
-              : 'text-[#75736E] hover:text-[#111111]'
+              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
+              : 'text-[#64748B] hover:text-[#0F172A]'
           }`}
           aria-label="Home"
         >
@@ -57,10 +48,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('ledger')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'ledger'
-              ? 'text-[#C9A96E]'
+              ? 'text-[#D4AF37]'
               : isDark
-              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
-              : 'text-[#75736E] hover:text-[#111111]'
+              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
+              : 'text-[#64748B] hover:text-[#0F172A]'
           }`}
           aria-label="Ledger"
         >
@@ -73,28 +64,28 @@ export const Navbar: React.FC = () => {
           <button
             type="button"
             onClick={() => setQuickAddOpen(true)}
-            className="w-13 h-13 rounded-full bg-[#C9A96E] hover:bg-[#D7BC88] active:scale-95 text-[#0B0B0C] flex items-center justify-center shadow-lg transition-transform duration-150 border-2 border-[#0B0B0C]"
+            className="w-13 h-13 rounded-full bg-[#D4AF37] hover:bg-[#E5C358] active:scale-95 text-[#08090C] flex items-center justify-center shadow-lg transition-transform duration-150 border-2 border-[#08090C]"
             aria-label="Quick Add"
           >
             <Plus strokeWidth={2} className="w-6 h-6" />
           </button>
         </div>
 
-        {/* Right items: Budgets, Goals, Insights */}
+        {/* Right items: Planner, Goals, Insights */}
         <button
           type="button"
-          onClick={() => setActiveTab('budgets')}
+          onClick={() => setActiveTab('planner')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
-            activeTab === 'budgets'
-              ? 'text-[#C9A96E]'
+            activeTab === 'planner'
+              ? 'text-[#D4AF37]'
               : isDark
-              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
-              : 'text-[#75736E] hover:text-[#111111]'
+              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
+              : 'text-[#64748B] hover:text-[#0F172A]'
           }`}
-          aria-label="Budgets"
+          aria-label="Day Planner"
         >
-          <SlidersHorizontal strokeWidth={1.5} className="w-5 h-5" />
-          <span className="text-[10px] tracking-wide font-normal">Budgets</span>
+          <CalendarCheck strokeWidth={1.5} className="w-5 h-5" />
+          <span className="text-[10px] tracking-wide font-normal">Planner</span>
         </button>
 
         <button
@@ -102,10 +93,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('goals')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'goals'
-              ? 'text-[#C9A96E]'
+              ? 'text-[#D4AF37]'
               : isDark
-              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
-              : 'text-[#75736E] hover:text-[#111111]'
+              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
+              : 'text-[#64748B] hover:text-[#0F172A]'
           }`}
           aria-label="Goals"
         >
@@ -118,10 +109,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setActiveTab('insights')}
           className={`flex flex-col items-center gap-1 py-1 px-2.5 transition-colors ${
             activeTab === 'insights'
-              ? 'text-[#C9A96E]'
+              ? 'text-[#D4AF37]'
               : isDark
-              ? 'text-[#8A8A8F] hover:text-[#F4F2EE]'
-              : 'text-[#75736E] hover:text-[#111111]'
+              ? 'text-[#94A3B8] hover:text-[#F8FAFC]'
+              : 'text-[#64748B] hover:text-[#0F172A]'
           }`}
           aria-label="Insights"
         >

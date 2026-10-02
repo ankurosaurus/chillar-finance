@@ -61,6 +61,26 @@ export interface SavingsChallenge {
   completed: boolean;
 }
 
+export interface PlannedItem {
+  id: string;
+  title: string;
+  plannedAmount: number;
+  categoryId: string;
+  actualAmount?: number;
+  status: 'planned' | 'spent' | 'skipped';
+  transactionId?: string;
+  isPrepaidMess?: boolean;
+  timeSlot?: 'Morning' | 'Afternoon' | 'Evening' | 'Night' | 'Anytime';
+  note?: string;
+}
+
+export interface DayPlan {
+  date: string; // YYYY-MM-DD
+  targetBudget?: number;
+  notes?: string;
+  items: PlannedItem[];
+}
+
 export type ThemeMode = 'dark' | 'light';
 export type AccentColor = 'gold' | 'emerald' | 'sapphire' | 'copper';
 

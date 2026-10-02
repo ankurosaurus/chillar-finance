@@ -10,11 +10,10 @@ import { LockScreen } from './components/LockScreen';
 import { Onboarding } from './pages/Onboarding';
 import { Home } from './pages/Home';
 import { Ledger } from './pages/Ledger';
-import { Budgets } from './pages/Budgets';
+import { DayPlanner } from './pages/DayPlanner';
 import { Goals } from './pages/Goals';
 import { Insights } from './pages/Insights';
 import { Settings } from './pages/Settings';
-import { Sliders } from 'lucide-react';
 
 export const App: React.FC = () => {
   const profile = useFinanceStore((state) => state.profile);
@@ -53,7 +52,7 @@ export const App: React.FC = () => {
         <main className="flex-1 px-4 sm:px-6 pt-3 md:pt-6">
           {activeTab === 'home' && <Home />}
           {activeTab === 'ledger' && <Ledger />}
-          {activeTab === 'budgets' && <Budgets />}
+          {activeTab === 'planner' && <DayPlanner />}
           {activeTab === 'goals' && <Goals />}
           {activeTab === 'insights' && <Insights />}
           {activeTab === 'settings' && <Settings />}

@@ -7,6 +7,9 @@ import {
   Goal,
   SavingsChallenge,
   InAppAlert,
+  PlannedItem,
+  DayPlan,
+  PaymentMode,
 } from '../types/finance';
 import {
   INITIAL_PROFILE,
@@ -22,14 +25,15 @@ interface FinanceState {
   categories: Category[];
   goals: Goal[];
   challenges: SavingsChallenge[];
+  dayPlans: Record<string, DayPlan>;
   alerts: InAppAlert[];
   isLocked: boolean;
-  activeTab: 'home' | 'ledger' | 'budgets' | 'goals' | 'insights' | 'settings';
+  activeTab: 'home' | 'ledger' | 'planner' | 'goals' | 'insights' | 'settings';
   isQuickAddOpen: boolean;
   isAffordabilityModalOpen: boolean;
 
   // Actions
-  setActiveTab: (tab: 'home' | 'ledger' | 'budgets' | 'goals' | 'insights' | 'settings') => void;
+  setActiveTab: (tab: 'home' | 'ledger' | 'planner' | 'goals' | 'insights' | 'settings') => void;
   setQuickAddOpen: (open: boolean) => void;
   setAffordabilityModalOpen: (open: boolean) => void;
   setProfile: (profile: Partial<Profile>) => void;
@@ -38,6 +42,14 @@ interface FinanceState {
   addTransaction: (tx: Omit<Transaction, 'id'>) => { id: string; roundUpSaved?: number; outsideFoodNudge?: string };
   updateTransaction: (id: string, tx: Partial<Transaction>) => void;
   deleteTransaction: (id: string) => void;
+
+  // Day Planner Actions
+  setDayPlanTarget: (date: string, targetBudget?: number, notes?: string) => void;
+  addPlannedItem: (date: string, item: Omit<PlannedItem, 'id' | 'status'>) => void;
+  updatePlannedItem: (date: string, itemId: string, updates: Partial<PlannedItem>) => void;
+  deletePlannedItem: (date: string, itemId: string) => void;
+  markPlannedItemSpent: (date: string, itemId: string, actualAmount?: number, paymentMode?: PaymentMode) => void;
+  markPlannedItemSkipped: (date: string, itemId: string) => void;
 
   addCategory: (cat: Omit<Category, 'id'>) => void;
   updateCategory: (id: string, cat: Partial<Category>) => void;
@@ -88,6 +100,7 @@ export const useFinanceStore = create<FinanceState>()(
       categories: INITIAL_CATEGORIES,
       goals: [],
       challenges: [],
+      dayPlans: {},
       alerts: [],
       isLocked: false,
       activeTab: 'home',
@@ -199,6 +212,145 @@ export const useFinanceStore = create<FinanceState>()(
         set((state) => ({
           transactions: state.transactions.filter((t) => t.id !== id),
         })),
+
+      // Day Planner Actions
+      setDayPlanTarget: (date, targetBudget, notes) =>
+        set((state) => {
+          const currentPlan = state.dayPlans[date] || { date, items: [] };
+          return {
+            dayPlans: {
+              ...state.dayPlans,
+              [date]: {
+                ...currentPlan,
+                targetBudget: targetBudget !== undefined ? targetBudget : currentPlan.targetBudget,
+                notes: notes !== undefined ? notes : currentPlan.notes,
+              },
+            },
+          };
+        }),
+
+      addPlannedItem: (date, itemData) =>
+        set((state) => {
+          const currentPlan = state.dayPlans[date] || { date, items: [] };
+          const newItem: PlannedItem = {
+            ...itemData,
+            id: `plan-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+            status: 'planned',
+          };
+          return {
+            dayPlans: {
+              ...state.dayPlans,
+              [date]: {
+                ...currentPlan,
+                items: [...currentPlan.items, newItem],
+              },
+            },
+          };
+        }),
+
+      updatePlannedItem: (date, itemId, updates) =>
+        set((state) => {
+          const currentPlan = state.dayPlans[date];
+          if (!currentPlan) return state;
+          return {
+            dayPlans: {
+              ...state.dayPlans,
+              [date]: {
+                ...currentPlan,
+                items: currentPlan.items.map((item) =>
+                  item.id === itemId ? { ...item, ...updates } : item
+                ),
+              },
+            },
+          };
+        }),
+
+      deletePlannedItem: (date, itemId) =>
+        set((state) => {
+          const currentPlan = state.dayPlans[date];
+          if (!currentPlan) return state;
+          return {
+            dayPlans: {
+              ...state.dayPlans,
+              [date]: {
+                ...currentPlan,
+                items: currentPlan.items.filter((item) => item.id !== itemId),
+              },
+            },
+          };
+        }),
+
+      markPlannedItemSpent: (date, itemId, actualAmount, paymentMode = 'UPI') => {
+        const state = get();
+        const currentPlan = state.dayPlans[date];
+        if (!currentPlan) return;
+        const item = currentPlan.items.find((i) => i.id === itemId);
+        if (!item) return;
+
+        const spendAmount = actualAmount !== undefined ? actualAmount : item.plannedAmount;
+
+        let txId: string | undefined;
+        if (!item.isPrepaidMess && spendAmount > 0) {
+          const res = get().addTransaction({
+            type: 'expense',
+            amount: spendAmount,
+            categoryId: item.categoryId,
+            note: item.title,
+            date: date,
+            mode: paymentMode,
+          });
+          txId = res.id;
+        }
+
+        set((s) => {
+          const plan = s.dayPlans[date];
+          if (!plan) return s;
+          return {
+            dayPlans: {
+              ...s.dayPlans,
+              [date]: {
+                ...plan,
+                items: plan.items.map((i) =>
+                  i.id === itemId
+                    ? {
+                        ...i,
+                        status: 'spent',
+                        actualAmount: spendAmount,
+                        transactionId: txId,
+                      }
+                    : i
+                ),
+              },
+            },
+          };
+        });
+      },
+
+      markPlannedItemSkipped: (date, itemId) => {
+        set((s) => {
+          const plan = s.dayPlans[date];
+          if (!plan) return s;
+          const item = plan.items.find((i) => i.id === itemId);
+          if (item && item.plannedAmount > 0) {
+            get().addAlert({
+              type: 'goal_milestone',
+              title: `Saved ₹${item.plannedAmount}!`,
+              message: `You skipped "${item.title}" and saved ₹${item.plannedAmount} for your future plans.`,
+            });
+          }
+          return {
+            dayPlans: {
+              ...s.dayPlans,
+              [date]: {
+                ...plan,
+                items: plan.items.map((i) =>
+                  i.id === itemId ? { ...i, status: 'skipped' } : i
+                ),
+              },
+            },
+          };
+        });
+      },
 
       addCategory: (catData) => {
         const id = `cat-${Date.now()}`;
@@ -435,8 +587,9 @@ export const useFinanceStore = create<FinanceState>()(
           categories: state.categories,
           goals: state.goals,
           challenges: state.challenges,
+          dayPlans: state.dayPlans,
           exportedAt: new Date().toISOString(),
-          version: '1.0.0',
+          version: '1.1.0',
         };
         return JSON.stringify(exportObj, null, 2);
       },
@@ -453,6 +606,7 @@ export const useFinanceStore = create<FinanceState>()(
             categories: parsed.categories || INITIAL_CATEGORIES,
             goals: parsed.goals || [],
             challenges: parsed.challenges || [],
+            dayPlans: parsed.dayPlans || {},
             alerts: [],
           });
           return true;
@@ -488,6 +642,7 @@ export const useFinanceStore = create<FinanceState>()(
         categories: state.categories,
         goals: state.goals,
         challenges: state.challenges,
+        dayPlans: state.dayPlans,
         alerts: state.alerts,
         isLocked: state.profile.pinEnabled ? true : false,
       }),
